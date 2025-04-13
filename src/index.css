@@ -122,7 +122,7 @@ body {
 }
 
 .gradient-bg {
-  background: linear-gradient(135deg, #4f46e5 0%, #10b981 100%);
+  background: linear-gradient(135deg, #181818 0%, #5a6374 100%);
 }
 
 .feature-card:hover {

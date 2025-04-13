@@ -18,7 +18,7 @@ const RegisterComponent = () => {
     <>
       <NavbarComponent />
       <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md mt-20">
           <div className="flex flex-col justify-center items-center">
             <FaBriefcase className="text-primary text-5xl mb-4 text-center" />
             <h2 className="text-3xl font-extrabold text-gray-900">

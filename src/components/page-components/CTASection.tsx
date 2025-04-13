@@ -17,7 +17,7 @@ const CTASection = () => {
               <div className="inline-flex rounded-md shadow">
                 <Link
                   to="/register"
-                  className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-white hover:bg-gray-50"
+                  className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-sm sm:text-base font-medium rounded-md text-primary bg-white hover:bg-gray-50"
                 >
                   Get Started for Free
                 </Link>
@@ -25,7 +25,7 @@ const CTASection = () => {
               <div className="ml-3 inline-flex">
                 <a
                   href="#demo"
-                  className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary/20 hover:bg-primary/30"
+                  className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-sm sm:text-base font-medium rounded-md text-white bg-primary/20 hover:bg-primary/30"
                 >
                   Watch Demo
                 </a>
