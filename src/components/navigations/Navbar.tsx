@@ -72,14 +72,8 @@ const NavbarComponent = () => {
             )}
 
             {pathname === "/register" ? (
-              <span>
-                <span
-                  className={
-                    pathname === "/register"
-                      ? "text-gray-500 text-sm mr-2"
-                      : "hidden"
-                  }
-                >
+              <div className="flex items-center">
+                <span className={"text-gray-500 text-sm mr-2 hidden md:block"}>
                   Already have an account?
                 </span>
                 <NavLink
@@ -88,14 +82,14 @@ const NavbarComponent = () => {
                 >
                   Sign In
                 </NavLink>
-              </span>
+              </div>
             ) : (
               <></>
             )}
 
             {pathname === "/login" ? (
-              <span>
-                <span className={"text-gray-500 text-sm mr-2"}>
+              <div className="flex items-center">
+                <span className={"text-gray-500 text-sm mr-2 hidden md:block"}>
                   Don't have an account?
                 </span>
                 <NavLink
@@ -104,7 +98,7 @@ const NavbarComponent = () => {
                 >
                   Sign Up
                 </NavLink>
-              </span>
+              </div>
             ) : (
               <></>
             )}

@@ -2,15 +2,16 @@ import {
   FaBriefcase,
   FaEnvelope,
   FaEye,
-  FaGithub,
-  FaGoogle,
-  FaLinkedin,
+  // FaGithub,
+  // FaGoogle,
+  // FaLinkedin,
   FaLock,
   FaPhone,
   FaUser,
 } from "react-icons/fa6";
 import NavbarComponent from "../navigations/Navbar";
 import FooterAuth from "../navigations/FooterAuth";
+import { Link } from "react-router";
 
 const RegisterComponent = () => {
   return (
@@ -204,7 +205,7 @@ const RegisterComponent = () => {
             </form>
 
             {/* <!-- Social Login --> */}
-            <div className="mt-6">
+            {/* <div className="mt-6">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-300"></div>
@@ -242,6 +243,18 @@ const RegisterComponent = () => {
                   </a>
                 </div>
               </div>
+            </div> */}
+
+            <div className="mt-6 text-center">
+              <span className={"text-gray-500 text-sm mr-2"}>
+                Already have an account?
+              </span>
+              <Link
+                to="/login"
+                className="text-dark hover:text-primary/80 text-sm font-medium"
+              >
+                Sign In
+              </Link>
             </div>
           </div>
         </div>

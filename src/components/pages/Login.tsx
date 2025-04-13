@@ -2,20 +2,21 @@ import {
   FaBriefcase,
   FaEnvelope,
   FaEye,
-  FaGithub,
-  FaGoogle,
-  FaLinkedin,
+  // FaGithub,
+  // FaGoogle,
+  // FaLinkedin,
   FaLock,
 } from "react-icons/fa6";
 import NavbarComponent from "../navigations/Navbar";
 import FooterAuth from "../navigations/FooterAuth";
+import { Link } from "react-router";
 
 const LoginComponent = () => {
   return (
     <>
       <NavbarComponent />
       <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md -mt-20">
           <div className="flex flex-col justify-center items-center">
             <FaBriefcase className="text-primary text-5xl mb-4 text-center" />
             <h2 className="text-3xl font-extrabold text-gray-900">
@@ -94,7 +95,7 @@ const LoginComponent = () => {
             </form>
 
             {/* <!-- Social Login --> */}
-            <div className="mt-6">
+            {/* <div className="mt-6">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-300"></div>
@@ -132,6 +133,17 @@ const LoginComponent = () => {
                   </a>
                 </div>
               </div>
+            </div> */}
+            <div className="mt-6 text-center">
+              <span className={"text-gray-500 text-sm mr-2"}>
+                Don't have an account?
+              </span>
+              <Link
+                to="/register"
+                className="text-dark hover:text-primary/80 text-sm font-medium"
+              >
+                Sign Up
+              </Link>
             </div>
           </div>
         </div>
