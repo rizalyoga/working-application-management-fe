@@ -1,18 +1,16 @@
-import { useState } from "react";
-import { Button } from "./components/ui/button";
+import { Route, Routes } from "react-router";
+
+import LandingPageView from "./views/LandingPageView";
+import LoginView from "./views/LoginView";
+import RegisterView from "./views/RegisterView";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <Button className="ml-8" size={"lg"} variant={"secondary"}>
-        Click Me
-      </Button>
-    </>
+    <Routes>
+      <Route path="/" Component={LandingPageView} />
+      <Route path="register" Component={RegisterView} />
+      <Route path="login" Component={LoginView} />
+    </Routes>
   );
 }
 
