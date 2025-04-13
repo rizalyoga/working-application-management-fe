@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const PricingSection = () => {
   return (
     <section id="pricing" className="py-12 bg-gray-50">
@@ -49,12 +51,12 @@ const PricingSection = () => {
                 </li>
               </ul>
               <div className="mt-8">
-                <a
-                  href="/register"
+                <Link
+                  to="/register"
                   className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700"
                 >
                   Get Started
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -106,12 +108,12 @@ const PricingSection = () => {
                 </li>
               </ul>
               <div className="mt-8">
-                <a
-                  href="/register"
+                <Link
+                  to="/register"
                   className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary/90"
                 >
                   Get Started
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -154,12 +156,12 @@ const PricingSection = () => {
                 </li>
               </ul>
               <div className="mt-8">
-                <a
-                  href="/register"
+                <Link
+                  to="/register"
                   className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700"
                 >
                   Get Started
-                </a>
+                </Link>
               </div>
             </div>
           </div>

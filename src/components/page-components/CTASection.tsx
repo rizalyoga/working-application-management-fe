@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const CTASection = () => {
   return (
     <>
@@ -13,12 +15,12 @@ const CTASection = () => {
             </p>
             <div className="mt-8 flex justify-center">
               <div className="inline-flex rounded-md shadow">
-                <a
-                  href="/register"
+                <Link
+                  to="/register"
                   className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-white hover:bg-gray-50"
                 >
                   Get Started for Free
-                </a>
+                </Link>
               </div>
               <div className="ml-3 inline-flex">
                 <a
