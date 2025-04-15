@@ -13,7 +13,7 @@ const CTASection = () => {
               Join thousands of job seekers who found their dream jobs with
               JobTrack.
             </p>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex justify-center items-center">
               <div className="inline-flex rounded-md shadow">
                 <Link
                   to="/register"
