@@ -63,7 +63,10 @@ const RegisterComponent = () => {
     mutationFn: registerUser,
     onSuccess: (data) => {
       form.reset();
-      toast(data.message);
+      toast("Account was successfully created!", {
+        description: data.message,
+        position: "top-right",
+      });
 
       setCookie("access_token", data.data?.tokens.access_token, 1);
       setCookie("refresh_token", data.data?.tokens.refresh_token, 7);
@@ -74,7 +77,10 @@ const RegisterComponent = () => {
       form.setError("root", {
         message: error.message || "Registration failed",
       });
-      toast(`Registration failed! \n${error.message}`);
+      toast(`Registration failed!`, {
+        description: error.message,
+        position: "top-right",
+      });
     },
   });
 

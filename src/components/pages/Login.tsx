@@ -6,10 +6,10 @@ import { useMutation } from "@tanstack/react-query";
 
 import {
   FaBriefcase,
-  FaEnvelope,
   FaEye,
   FaLock,
   FaRegEyeSlash,
+  FaUser,
 } from "react-icons/fa6";
 import {
   Form,
@@ -56,7 +56,10 @@ const LoginComponent = () => {
     mutationFn: loginUser,
     onSuccess: (data) => {
       form.reset();
-      toast(data.message);
+      toast(`Login Successful`, {
+        description: `Welcome Back ${data.data.user.name}`,
+        position: "top-right",
+      });
 
       setCookie("access_token", data.data?.tokens.access_token, 1);
       setCookie("refresh_token", data.data?.tokens.refresh_token, 7);
@@ -65,9 +68,12 @@ const LoginComponent = () => {
       // Handle error
       console.error(error);
       form.setError("root", {
-        message: error.message || "Registration failed",
+        message: error.message || "Login failed",
       });
-      toast(`Registration failed! \n${error.message}`);
+      toast(`Login failed!`, {
+        description: error.message,
+        position: "top-right",
+      });
     },
   });
 
@@ -105,7 +111,7 @@ const LoginComponent = () => {
                       <FormLabel>Email / Phone number</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <FaEnvelope className="text-gray-400 absolute mt-2.5 mx-3" />
+                          <FaUser className="text-gray-400 absolute mt-2.5 mx-3" />
                           <Input
                             placeholder="john@mail.com / +62 82321986727"
                             {...field}
@@ -167,7 +173,7 @@ const LoginComponent = () => {
                 )}
               </form>
             </Form>
-            <div className="mt-6 text-center">
+            <div className="mt-4 text-center">
               <span className={"text-gray-500 text-sm mr-2"}>
                 Don't have an account?
               </span>
