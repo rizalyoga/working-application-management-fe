@@ -1,15 +1,21 @@
+import { getCookie } from "../cookies/cookies";
+
 export async function fetchAPI<T>(
   url: string,
   method: string,
-  options = {},
-  timeout: number = 7000
+  needToken: boolean,
+  options = {}
 ): Promise<T> {
   const controller = new AbortController();
+  const timeout = 7000;
   const timeoutId = setTimeout(() => controller.abort(), timeout);
+  const token = getCookie("access_token");
+
   const defaultOptions = {
     method: method,
     headers: {
       "Content-Type": "application/json",
+      Authorization: needToken ? `Bearer ${token}` : "",
     },
     signal: controller.signal,
     ...options,

@@ -23,16 +23,25 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import AuthLayout from "../layout/AuthLayout";
 
 import { fetchAPI } from "@/lib/API/auth";
 import { APIResponse } from "@/types/API-types";
 import { formLoginSchema } from "@/lib/form-validator/auth-form-validator";
 import { setCookie } from "@/lib/cookies/cookies";
+import useProfileUserStore from "@/stores/useProfileStore";
 
 const LoginComponent = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const {
+    updateName,
+    updateEmail,
+    updatePhoneNumber,
+    updateProfilePictureUrl,
+    updateResumeUrl,
+  } = useProfileUserStore();
 
   type FormValues = z.infer<typeof formLoginSchema>;
   const form = useForm<FormValues>({
@@ -46,9 +55,14 @@ const LoginComponent = () => {
   const loginUser = async (data: FormValues): Promise<APIResponse> => {
     const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-    return await fetchAPI<APIResponse>(`${BASE_URL}/auth/login`, "POST", {
-      body: JSON.stringify(data),
-    });
+    return await fetchAPI<APIResponse>(
+      `${BASE_URL}/auth/login`,
+      "POST",
+      false,
+      {
+        body: JSON.stringify(data),
+      }
+    );
   };
 
   // TanStack Query mutation for form submission
@@ -56,13 +70,26 @@ const LoginComponent = () => {
     mutationFn: loginUser,
     onSuccess: (data) => {
       form.reset();
-      toast(`Login Successful`, {
+      toast(`Login Successfull! 🥰`, {
         description: `Welcome Back ${data.data.user.name}`,
         position: "top-right",
       });
 
+      updateName(data.data?.user.name);
+      updateEmail(data.data?.user.email);
+      updatePhoneNumber(data.data?.user.phone_number);
+      updateProfilePictureUrl(
+        data.data?.user.profile_picture_url
+          ? data.data?.user.profile_picture_url
+          : ""
+      );
+      updateResumeUrl(
+        data.data?.user.resume_url ? data.data?.user.resume_url : ""
+      );
+
       setCookie("access_token", data.data?.tokens.access_token, 1);
       setCookie("refresh_token", data.data?.tokens.refresh_token, 7);
+      navigate("/dashboard");
     },
     onError: (error) => {
       // Handle error

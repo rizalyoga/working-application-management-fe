@@ -7,7 +7,8 @@ const cherryPickedKeys = ["REACT_APP_API_BASE_URL"];
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const processEnv = {};
+
+  const processEnv: Record<string, string> = {};
   cherryPickedKeys.forEach((key) => (processEnv[key] = env[key]));
 
   return {

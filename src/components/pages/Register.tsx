@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -35,6 +35,7 @@ import { setCookie } from "@/lib/cookies/cookies";
 const RegisterComponent = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   // Initialize form with react-hook-form and zod
   type FormValues = z.infer<typeof formRegisterSchema>;
@@ -53,9 +54,14 @@ const RegisterComponent = () => {
   const registerUser = async (data: FormValues): Promise<APIResponse> => {
     const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-    return await fetchAPI<APIResponse>(`${BASE_URL}/auth/register`, "POST", {
-      body: JSON.stringify(data),
-    });
+    return await fetchAPI<APIResponse>(
+      `${BASE_URL}/auth/register`,
+      "POST",
+      false,
+      {
+        body: JSON.stringify(data),
+      }
+    );
   };
 
   // TanStack Query mutation for form submission
@@ -70,6 +76,7 @@ const RegisterComponent = () => {
 
       setCookie("access_token", data.data?.tokens.access_token, 1);
       setCookie("refresh_token", data.data?.tokens.refresh_token, 7);
+      navigate("/dashboard");
     },
     onError: (error) => {
       // Handle error

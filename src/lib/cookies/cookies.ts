@@ -30,3 +30,7 @@ export const getCookie = (name: string) => {
 // Mengambil token
 // const accessToken = getCookie('access_token');
 // const refreshToken = getCookie('refresh_token');
+
+export const removeCookie = (name: string) => {
+  document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+};
