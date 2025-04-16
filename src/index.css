@@ -134,7 +134,7 @@ body {
 .timeline-item:not(:last-child)::after {
   content: "";
   position: absolute;
-  left: 16px;
+  left: 15px;
   top: 32px;
   height: calc(100% - 32px);
   width: 2px;

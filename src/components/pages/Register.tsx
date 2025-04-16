@@ -4,8 +4,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation } from "@tanstack/react-query";
-import NavbarComponent from "../navigations/Navbar";
-import FooterAuth from "../navigations/FooterAuth";
 import {
   Form,
   FormControl,
@@ -30,7 +28,9 @@ import {
 } from "react-icons/fa6";
 import { fetchAPI } from "@/lib/API/auth";
 import { APIResponse } from "@/types/API-types";
-import { formRegisterSchema } from "@/lib/form-validator/auth-orm-validator";
+import { formRegisterSchema } from "@/lib/form-validator/auth-form-validator";
+import AuthLayout from "../layout/AuthLayout";
+import { setCookie } from "@/lib/cookies/cookies";
 
 const RegisterComponent = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -64,6 +64,9 @@ const RegisterComponent = () => {
     onSuccess: (data) => {
       form.reset();
       toast(data.message);
+
+      setCookie("access_token", data.data?.tokens.access_token, 1);
+      setCookie("refresh_token", data.data?.tokens.refresh_token, 7);
     },
     onError: (error) => {
       // Handle error
@@ -81,8 +84,7 @@ const RegisterComponent = () => {
   };
 
   return (
-    <>
-      <NavbarComponent />
+    <AuthLayout>
       <div className="min-h-screen flex items-center justify-center flex-col py-12 sm:px-6 lg:px-8 mt-16">
         <div className="flex flex-col justify-center items-center mb-8">
           <FaBriefcase className="text-primary text-5xl mb-4 text-center" />
@@ -292,8 +294,7 @@ const RegisterComponent = () => {
           </CardContent>
         </Card>
       </div>
-      <FooterAuth />
-    </>
+    </AuthLayout>
   );
 };
 

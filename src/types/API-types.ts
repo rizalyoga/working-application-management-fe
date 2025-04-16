@@ -1,11 +1,6 @@
 export interface APIResponse {
-  success: boolean;
+  status: "success" | "error";
+  status_code: number;
   message?: string;
-  data?: {
-    status: "success" | "error";
-    status_code: number;
-    message: string;
-    data?: any;
-    errors?: any;
-  };
+  data?: any;
 }

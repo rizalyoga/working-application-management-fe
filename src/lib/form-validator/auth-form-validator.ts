@@ -18,3 +18,17 @@ export const formRegisterSchema = z
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export const formLoginSchema = z.object({
+  identifier: z
+    .string()
+    .refine(
+      (value) => emailRegex.test(value) || /^\+?[1-9]\d{1,14}$/.test(value),
+      {
+        message: "Identifier must be a valid email or phone number",
+      }
+    ),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+});
