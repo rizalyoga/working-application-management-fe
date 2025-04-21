@@ -29,7 +29,7 @@ import AuthLayout from "../layout/AuthLayout";
 import { fetchAPI } from "@/lib/API/auth";
 import { APIResponse } from "@/types/API-types";
 import { formLoginSchema } from "@/lib/form-validator/auth-form-validator";
-import { setCookie } from "@/lib/cookies/cookies";
+import { removeCookie, setCookie } from "@/lib/cookies/cookies";
 import useProfileUserStore from "@/stores/useProfileStore";
 
 const LoginComponent = () => {
@@ -87,6 +87,8 @@ const LoginComponent = () => {
         data.data?.user.resume_url ? data.data?.user.resume_url : ""
       );
 
+      removeCookie("access_token");
+      removeCookie("refresh_token");
       setCookie("access_token", data.data?.tokens.access_token, 1);
       setCookie("refresh_token", data.data?.tokens.refresh_token, 7);
       navigate("/dashboard");
