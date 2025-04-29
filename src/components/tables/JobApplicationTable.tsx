@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -19,12 +20,120 @@ import {
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreVerticalIcon } from "lucide-react";
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { RxDoubleArrowLeft, RxDoubleArrowRight } from "react-icons/rx";
 
+// Komponen utama
 const JobApplicationTable = ({
   data,
 }: {
   data: JobApplication[] | undefined;
 }) => {
+  // State untuk search
+  const [globalFilter, setGlobalFilter] = useState("");
+
+  // Definisi kolom untuk TanStack Table
+  const columns: ColumnDef<JobApplication>[] = [
+    {
+      accessorKey: "index",
+      header: "No",
+      cell: ({ row }) => <div className="text-center">{row.index + 1}</div>,
+      enableGlobalFilter: false,
+    },
+    {
+      accessorKey: "application_date",
+      header: "Application Date",
+      cell: ({ row }) => (
+        <div className="text-center">
+          {formatDate(row.getValue("application_date"))}
+        </div>
+      ),
+    },
+    {
+      accessorKey: "job_position",
+      header: "Job Position",
+    },
+    {
+      accessorKey: "company_name",
+      header: "Company",
+    },
+    {
+      accessorKey: "job_portal",
+      header: "Job Portal",
+      enableGlobalFilter: true,
+      cell: ({ row }) => (
+        <div className="text-center">{row.getValue("job_portal")}</div>
+      ),
+    },
+    {
+      accessorKey: "status",
+      header: "Status",
+      cell: ({ row }) => (
+        <div className="text-center">
+          <Badge className={getStatusVariant(row.getValue("status"))}>
+            {row.getValue("status")}
+          </Badge>
+        </div>
+      ),
+    },
+    {
+      accessorKey: "notes",
+      header: "Notes",
+      cell: ({ row }) => (
+        <div className="text-center">{row.getValue("notes")}</div>
+      ),
+    },
+    {
+      id: "actions",
+      header: () => <div className="text-center">Actions</div>,
+      cell: ({ row }) => (
+        <div className="text-center">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
+                size="icon"
+              >
+                <MoreVerticalIcon />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-32">
+              <DropdownMenuItem onClick={() => alert(`Edit id: ${row.id}`)}>
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem>Make a copy</DropdownMenuItem>
+              <DropdownMenuItem>Favorite</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => alert(`Hapus id: ${row.id}`)}>
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      ),
+      enableGlobalFilter: false,
+    },
+  ];
+
+  // Fungsi untuk memformat status badge
   const getStatusVariant = (status: string) => {
     switch (status.toLowerCase()) {
       case "apply":
@@ -39,9 +148,9 @@ const JobApplicationTable = ({
         return "bg-purple-400";
       case "interview user ii":
         return "bg-purple-400";
-      case "interview C Level":
+      case "interview c level":
         return "bg-orange-400";
-      case "interview C Level II":
+      case "interview c level ii":
         return "bg-orange-500";
       case "reject":
         return "bg-red-400";
@@ -51,72 +160,143 @@ const JobApplicationTable = ({
         return "outline";
     }
   };
+
+  // Inisialisasi TanStack Table
+  const table = useReactTable({
+    data: data ?? [],
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    state: {
+      globalFilter,
+    },
+    onGlobalFilterChange: setGlobalFilter,
+    initialState: {
+      pagination: {
+        pageSize: 10,
+      },
+    },
+  });
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>Job Applications</CardTitle>
       </CardHeader>
       <CardContent>
+        {/* Search Input */}
+        <div className="mb-4">
+          <Input
+            placeholder="Search all columns..."
+            value={globalFilter ?? ""}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            className="max-w-sm"
+          />
+        </div>
+
+        {/* Table */}
         <Table>
           <TableHeader className="sticky top-0 z-10 bg-muted">
-            <TableRow>
-              <TableHead className="text-center">No</TableHead>
-              <TableHead className="text-center">Application Date</TableHead>
-              <TableHead className="text-center">Job Position</TableHead>
-              <TableHead className="text-center">Company</TableHead>
-              <TableHead className="text-center">Job Portal</TableHead>
-              <TableHead className="text-center">Status</TableHead>
-              <TableHead className="text-center">Notes</TableHead>
-              <TableHead className="text-center"></TableHead>
-            </TableRow>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id} className="text-center">
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
           </TableHeader>
           <TableBody>
-            {data?.map((application, idx) => (
-              <TableRow key={application.id}>
-                <TableCell className="text-center">{idx + 1}</TableCell>
-                <TableCell className="text-center">
-                  {formatDate(application.application_date)}
-                </TableCell>
-                <TableCell>{application.job_position}</TableCell>
-                <TableCell>{application.company_name}</TableCell>
-                <TableCell className="text-center">
-                  {application.job_portal}
-                </TableCell>
-                <TableCell className="text-center">
-                  <Badge className={getStatusVariant(application.status)}>
-                    {application.status}
-                  </Badge>
-                </TableCell>
-                <TableCell className="text-center">
-                  {application.notes}
-                </TableCell>
-                <TableCell className="text-center">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
-                        size="icon"
-                      >
-                        <MoreVerticalIcon />
-                        <span className="sr-only">Open menu</span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-32">
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem>Make a copy</DropdownMenuItem>
-                      <DropdownMenuItem>Favorite</DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Delete</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
+            {table.getRowModel().rows.map((row) => (
+              <TableRow key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
               </TableRow>
             ))}
           </TableBody>
         </Table>
         {data?.length === 0 && (
           <div className="text-center py-4">No applications found</div>
+        )}
+
+        {/* Pagination Controls */}
+        {data && data.length > 0 && (
+          <div className="flex items-center justify-between mt-4">
+            <div className="flex items-center space-x-2">
+              <p className="text-sm font-medium">Rows per page</p>
+              <Select
+                value={`${table.getState().pagination.pageSize}`}
+                onValueChange={(value) => {
+                  table.setPageSize(Number(value));
+                }}
+              >
+                <SelectTrigger className="h-8 w-[70px]">
+                  <SelectValue
+                    placeholder={table.getState().pagination.pageSize}
+                  />
+                </SelectTrigger>
+                <SelectContent side="top">
+                  {[5, 10, 20, 30, 50].map((pageSize) => (
+                    <SelectItem key={pageSize} value={`${pageSize}`}>
+                      {pageSize}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Button
+                variant="outline"
+                className="hidden size-8 p-0 lg:flex"
+                onClick={() => table.setPageIndex(0)}
+                disabled={!table.getCanPreviousPage()}
+              >
+                <span className="sr-only">Go to first page</span>
+                <RxDoubleArrowLeft className="size-4" />
+              </Button>
+              <Button
+                variant="outline"
+                className="size-8 p-0"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+              >
+                <span className="sr-only">Go to previous page</span>
+                <ChevronLeftIcon className="size-4" />
+              </Button>
+              <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+                Page {table.getState().pagination.pageIndex + 1} of{" "}
+                {table.getPageCount()}
+              </div>
+              <Button
+                variant="outline"
+                className="size-8 p-0"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+              >
+                <span className="sr-only">Go to next page</span>
+                <ChevronRightIcon className="size-4" />
+              </Button>
+              <Button
+                variant="outline"
+                className="hidden size-8 p-0 lg:flex"
+                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                disabled={!table.getCanNextPage()}
+              >
+                <span className="sr-only">Go to last page</span>
+                <RxDoubleArrowRight className="size-4" />
+              </Button>
+            </div>
+          </div>
         )}
       </CardContent>
     </Card>
