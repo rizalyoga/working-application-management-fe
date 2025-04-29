@@ -6,7 +6,7 @@ export interface APIResponse {
 }
 
 // Interface untuk tipe data dari API
-interface JobApplication {
+export interface JobApplication {
   id: string;
   application_date: string;
   job_position: string;
