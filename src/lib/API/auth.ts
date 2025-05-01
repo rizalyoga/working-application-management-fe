@@ -1,25 +1,5 @@
 import { getCookie, setCookie, removeCookie } from "../cookies/cookies";
-
-// Interface untuk response refresh token
-interface RefreshTokenResponse {
-  status: string;
-  status_code: number;
-  message: string;
-  data: {
-    tokens: {
-      access_token: string;
-      refresh_token: string;
-      expires_in: number;
-    };
-  };
-}
-
-// Interface untuk error response dari API
-interface ApiErrorResponse {
-  status?: string;
-  status_code?: number;
-  message?: string;
-}
+import { RefreshTokenResponse, ApiErrorResponse } from "@/types/API-types";
 
 export async function fetchRefreshToken() {
   const BASE_URL = process.env.REACT_APP_API_BASE_URL;

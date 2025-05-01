@@ -38,58 +38,36 @@ import {
 } from "@/components/ui/select";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { RxDoubleArrowLeft, RxDoubleArrowRight } from "react-icons/rx";
+import { getStatusVariant } from "@/lib/helper-table";
+
+interface JobApplicationTableProps {
+  data: JobApplication[] | undefined;
+  statusFilter: string;
+  onStatusChange: (value: string) => void;
+}
 
 // Komponen utama
 const JobApplicationTable = ({
   data,
-}: {
-  data: JobApplication[] | undefined;
-}) => {
+  statusFilter,
+  onStatusChange,
+}: JobApplicationTableProps) => {
   // State untuk search
   const [globalFilter, setGlobalFilter] = useState("");
-  const [statusFilter, setStatusFilter] = useState("All");
 
   const STATUS_OPTIONS = [
-    "All",
-    "Apply",
-    "Screening",
-    "Interview HR",
-    "Interview HR II",
-    "Interview User",
-    "Interview User II",
-    "Interview C level",
-    "Interview C level II",
-    "Reject",
-    "Success",
+    { All: "All" },
+    { Apply: 1 },
+    { Screening: 2 },
+    { "Interview HR": 3 },
+    { "Interview HR II": 7 },
+    { "Interview User": 4 },
+    { "Interview User II": 8 },
+    { "Interview C level": 9 },
+    { "Interview C level II": 10 },
+    { Reject: 5 },
+    { Hired: 6 },
   ];
-
-  // Fungsi untuk memformat status badge
-  const getStatusVariant = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "apply":
-        return "bg-lime-500";
-      case "screening":
-        return "bg-blue-400";
-      case "interview hr":
-        return "bg-sky-400";
-      case "interview hr ii":
-        return "bg-sky-400";
-      case "interview user":
-        return "bg-purple-400";
-      case "interview user ii":
-        return "bg-purple-400";
-      case "interview c level":
-        return "bg-orange-400";
-      case "interview c level ii":
-        return "bg-orange-500";
-      case "reject":
-        return "bg-red-400";
-      case "success":
-        return "bg-emerald-500";
-      default:
-        return "outline";
-    }
-  };
 
   // Definisi kolom untuk TanStack Table
   const columns: ColumnDef<JobApplication>[] = [
@@ -134,10 +112,6 @@ const JobApplicationTable = ({
           </Badge>
         </div>
       ),
-      filterFn: (row, _columnId, filterValue) => {
-        if (filterValue === "All") return true;
-        return row.original.status.toLowerCase() === filterValue.toLowerCase();
-      },
     },
     {
       accessorKey: "notes",
@@ -197,8 +171,6 @@ const JobApplicationTable = ({
     getPaginationRowModel: getPaginationRowModel(),
     state: {
       globalFilter,
-      //   columnFilters:
-      //     statusFilter !== "All" ? [{ id: "status", value: statusFilter }] : [],
     },
     onGlobalFilterChange: setGlobalFilter,
     initialState: {
@@ -226,16 +198,21 @@ const JobApplicationTable = ({
             <Button>
               <PlusIcon /> Add new application
             </Button>
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <Select value={statusFilter} onValueChange={onStatusChange}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
               <SelectContent>
-                {STATUS_OPTIONS.map((status) => (
-                  <SelectItem key={status} value={status}>
-                    {status === "All" ? "All Statuses" : status}
-                  </SelectItem>
-                ))}
+                {STATUS_OPTIONS.map((status, idx) => {
+                  const key = Object.keys(status)[0];
+                  const value = Object.values(status)[0];
+
+                  return (
+                    <SelectItem key={idx} value={value.toString()}>
+                      {key === "All" ? "All Statuses" : key}
+                    </SelectItem>
+                  );
+                })}
               </SelectContent>
             </Select>
           </span>
