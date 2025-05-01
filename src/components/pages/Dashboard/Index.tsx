@@ -4,9 +4,10 @@ import { fetchAPI } from "@/lib/API/auth";
 import { Card, CardContent } from "@/components/ui/card";
 import { ApiResponseForJobApplications } from "@/types/API-types";
 import JobApplicationTable from "@/components/tables/JobApplicationTable";
+import { useMemo } from "react";
 
 const DashboardIndex = () => {
-  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const BASE_URL = useMemo(() => process.env.REACT_APP_API_BASE_URL, []);
   const { data, isLoading, error } = useQuery<ApiResponseForJobApplications>({
     queryKey: ["jobApplications"],
     queryFn: () =>
@@ -17,6 +18,7 @@ const DashboardIndex = () => {
       ),
     retry: 2,
     staleTime: 10 * 60 * 1000, // Data dianggap fresh selama 10 menit
+    enabled: !!BASE_URL,
   });
 
   if (isLoading) {
@@ -44,7 +46,7 @@ const DashboardIndex = () => {
     return (
       <DashboardLayout>
         <Card>
-          <CardContent className="p-6">
+          <CardContent className="p-6 mt-28">
             <div className="text-center text-red-500">
               Error: {(error as Error).message}
             </div>

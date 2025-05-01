@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreVerticalIcon } from "lucide-react";
+import { MoreVerticalIcon, PlusIcon } from "lucide-react";
 import {
   ColumnDef,
   flexRender,
@@ -47,6 +47,49 @@ const JobApplicationTable = ({
 }) => {
   // State untuk search
   const [globalFilter, setGlobalFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
+
+  const STATUS_OPTIONS = [
+    "All",
+    "Apply",
+    "Screening",
+    "Interview HR",
+    "Interview HR II",
+    "Interview User",
+    "Interview User II",
+    "Interview C level",
+    "Interview C level II",
+    "Reject",
+    "Success",
+  ];
+
+  // Fungsi untuk memformat status badge
+  const getStatusVariant = (status: string) => {
+    switch (status.toLowerCase()) {
+      case "apply":
+        return "bg-lime-500";
+      case "screening":
+        return "bg-blue-400";
+      case "interview hr":
+        return "bg-sky-400";
+      case "interview hr ii":
+        return "bg-sky-400";
+      case "interview user":
+        return "bg-purple-400";
+      case "interview user ii":
+        return "bg-purple-400";
+      case "interview c level":
+        return "bg-orange-400";
+      case "interview c level ii":
+        return "bg-orange-500";
+      case "reject":
+        return "bg-red-400";
+      case "success":
+        return "bg-emerald-500";
+      default:
+        return "outline";
+    }
+  };
 
   // Definisi kolom untuk TanStack Table
   const columns: ColumnDef<JobApplication>[] = [
@@ -91,6 +134,10 @@ const JobApplicationTable = ({
           </Badge>
         </div>
       ),
+      filterFn: (row, _columnId, filterValue) => {
+        if (filterValue === "All") return true;
+        return row.original.status.toLowerCase() === filterValue.toLowerCase();
+      },
     },
     {
       accessorKey: "notes",
@@ -100,10 +147,11 @@ const JobApplicationTable = ({
       ),
     },
     {
-      id: "actions",
-      header: () => <div className="text-center">Actions</div>,
+      id: "id",
+      accessorKey: "id",
+      header: "Actions",
       cell: ({ row }) => (
-        <div className="text-center">
+        <div className="flex justify-center items-center">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -116,13 +164,20 @@ const JobApplicationTable = ({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-32">
-              <DropdownMenuItem onClick={() => alert(`Edit id: ${row.id}`)}>
+              <DropdownMenuItem
+                onClick={() => alert(`Edit id: ${row.getValue("id")}`)}
+              >
                 Edit
               </DropdownMenuItem>
-              <DropdownMenuItem>Make a copy</DropdownMenuItem>
-              <DropdownMenuItem>Favorite</DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => alert(`Detail id: ${row.getValue("id")}`)}
+              >
+                Detail
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => alert(`Hapus id: ${row.id}`)}>
+              <DropdownMenuItem
+                onClick={() => alert(`Hapus id: ${row.getValue("id")}`)}
+              >
                 Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -133,34 +188,6 @@ const JobApplicationTable = ({
     },
   ];
 
-  // Fungsi untuk memformat status badge
-  const getStatusVariant = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "apply":
-        return "bg-lime-500";
-      case "screening":
-        return "bg-blue-400";
-      case "interview hr":
-        return "bg-sky-400";
-      case "interview hr ii":
-        return "bg-sky-400";
-      case "interview user":
-        return "bg-purple-400";
-      case "interview user ii":
-        return "bg-purple-400";
-      case "interview c level":
-        return "bg-orange-400";
-      case "interview c level ii":
-        return "bg-orange-500";
-      case "reject":
-        return "bg-red-400";
-      case "success":
-        return "bg-emerald-500";
-      default:
-        return "outline";
-    }
-  };
-
   // Inisialisasi TanStack Table
   const table = useReactTable({
     data: data ?? [],
@@ -170,6 +197,8 @@ const JobApplicationTable = ({
     getPaginationRowModel: getPaginationRowModel(),
     state: {
       globalFilter,
+      //   columnFilters:
+      //     statusFilter !== "All" ? [{ id: "status", value: statusFilter }] : [],
     },
     onGlobalFilterChange: setGlobalFilter,
     initialState: {
@@ -182,17 +211,34 @@ const JobApplicationTable = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Job Applications</CardTitle>
+        <CardTitle className="text-xl">Job Applications</CardTitle>
       </CardHeader>
       <CardContent>
         {/* Search Input */}
-        <div className="mb-4">
+        <div className="mb-4 flex justify-between items-center">
           <Input
-            placeholder="Search all columns..."
+            placeholder="Search by job position / job portal..."
             value={globalFilter ?? ""}
             onChange={(e) => setGlobalFilter(e.target.value)}
             className="max-w-sm"
           />
+          <span className="flex gap-2">
+            <Button>
+              <PlusIcon /> Add new application
+            </Button>
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Filter by status" />
+              </SelectTrigger>
+              <SelectContent>
+                {STATUS_OPTIONS.map((status) => (
+                  <SelectItem key={status} value={status}>
+                    {status === "All" ? "All Statuses" : status}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </span>
         </div>
 
         {/* Table */}
@@ -246,7 +292,7 @@ const JobApplicationTable = ({
                   />
                 </SelectTrigger>
                 <SelectContent side="top">
-                  {[5, 10, 20, 30, 50].map((pageSize) => (
+                  {[5, 10, 15, 20, 25].map((pageSize) => (
                     <SelectItem key={pageSize} value={`${pageSize}`}>
                       {pageSize}
                     </SelectItem>
