@@ -65,8 +65,8 @@ const DashboardIndex = () => {
       <DashboardLayout>
         <Card>
           <CardContent className="p-6 min-h-dvh">
-            <div className="mt-28 max-w-7xl border border-slate-400 h-64 rounded-xl mx-auto px-4 sm:px-6 lg:px-8 bg-slate-200 shadow-2xl mb-2 animate-pulse flex justify-center flex-col gap-2 py-6">
-              <p className="text-black text-start font-bold mb-5">
+            <div className="mt-28 max-w-7xl border border-slate-400 h-64 rounded-xl mx-auto px-4 sm:px-6 lg:px-8 bg-slate-200 shadow-2xl mb-2 animate-pulse flex justify-center flex-col gap-2 py-6 dark:bg-black">
+              <p className="text-black dark:text-white text-start font-bold mb-5">
                 Job Applications
               </p>
               <div className="w-full bg-slate-400 border rounded-md h-10"></div>

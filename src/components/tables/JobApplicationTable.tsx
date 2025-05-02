@@ -186,17 +186,18 @@ const JobApplicationTable = ({
         <CardTitle className="text-xl">Job Applications</CardTitle>
       </CardHeader>
       <CardContent>
-        {/* Search Input */}
-        <div className="mb-4 flex justify-between items-center">
+        <div className="mb-4 flex justify-between items-center flex-col gap-4 md:flex-row">
+          {/* Search Input */}
           <Input
             placeholder="Search by job position / job portal..."
             value={globalFilter ?? ""}
             onChange={(e) => setGlobalFilter(e.target.value)}
-            className="max-w-sm"
+            className="md:max-w-sm"
           />
-          <span className="flex gap-2">
-            <Button>
-              <PlusIcon /> Add new application
+          <span className="flex gap-2 justify-between w-full md:justify-end">
+            <Button title="Add new application">
+              <PlusIcon />{" "}
+              <span className="hidden sm:block">Add new application</span>
             </Button>
             <Select value={statusFilter} onValueChange={onStatusChange}>
               <SelectTrigger className="w-[180px]">

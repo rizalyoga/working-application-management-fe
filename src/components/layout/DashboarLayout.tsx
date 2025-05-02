@@ -4,6 +4,7 @@ import useProfileUserStore from "@/stores/useProfileStore";
 
 import NavbarDashboardComponent from "../navigations/NavbarDashboard";
 import { APIResponse } from "@/types/API-types";
+import { ThemeProvider } from "next-themes";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const profileData = useProfileUserStore();
@@ -41,8 +42,10 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <>
-      <NavbarDashboardComponent />
-      {children}
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <NavbarDashboardComponent />
+        {children}
+      </ThemeProvider>
     </>
   );
 };

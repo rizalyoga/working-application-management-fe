@@ -16,11 +16,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ModeToggle } from "../toggles/ModeToggle";
 import useProfileUserStore from "@/stores/useProfileStore";
+import { useTheme } from "@/components/layout/ThemeProvider";
 
 const NavbarDashboard = () => {
   const navigate = useNavigate();
-
+  const { setTheme } = useTheme();
   const { name, profile_picture_url } = useProfileUserStore();
 
   const logoutFunction = async (): Promise<APIResponse> => {
@@ -38,6 +40,7 @@ const NavbarDashboard = () => {
         removeCookie("access_token");
         removeCookie("refresh_token");
         removeCookie("refresh_token");
+        setTheme("light");
         navigate("/login");
       })
       .catch((error) => {
@@ -50,7 +53,7 @@ const NavbarDashboard = () => {
   return (
     <nav
       className={
-        "bg-white shadow-sm fixed w-full top-0 transition-transform duration-300 z-50"
+        "shadow-sm fixed w-full top-0 transition-transform duration-300 z-50 dark:border-b dark:border-b-gray-500/35"
       }
     >
       <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
@@ -59,36 +62,39 @@ const NavbarDashboard = () => {
             <Briefcase />
             <span className="text-xl font-bold text-dark">JobTrack</span>
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Avatar>
-                <AvatarImage
-                  src={
-                    profile_picture_url
-                      ? profile_picture_url
-                      : "https://github.com/shadcn.png"
-                  }
-                  alt="user-avatar"
-                />
-                <AvatarFallback>AV</AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-36">
-              <DropdownMenuLabel>{name}</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Chart</DropdownMenuItem>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                className="focus:bg-destructive/60 focus:text-white"
-                onClick={handleLogout}
-              >
-                Log out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div className="flex gap-2">
+            <ModeToggle />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar>
+                  <AvatarImage
+                    src={
+                      profile_picture_url
+                        ? profile_picture_url
+                        : "https://github.com/shadcn.png"
+                    }
+                    alt="user-avatar"
+                  />
+                  <AvatarFallback className="bg-slate-400">AV</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-36">
+                <DropdownMenuLabel>{name}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <DropdownMenuItem>Chart</DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  className="focus:bg-destructive/60 focus:text-white"
+                  onClick={handleLogout}
+                >
+                  Log out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </div>
     </nav>
