@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router";
-
 import LandingPageView from "./views/LandingPageView";
 import LoginView from "./views/LoginView";
 import RegisterView from "./views/RegisterView";
