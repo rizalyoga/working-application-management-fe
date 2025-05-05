@@ -10,7 +10,10 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/lib/utils";
-import { JobApplication } from "@/types/job-application-types";
+import {
+  JobApplication,
+  JobApplicationTableProps,
+} from "@/types/job-application-types";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,7 +43,9 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { RxDoubleArrowLeft, RxDoubleArrowRight } from "react-icons/rx";
 import { getStatusVariant, STATUS_OPTIONS } from "@/lib/helper-table";
 import JobApplicationForm from "../forms/AppllicationForm";
-import { JobApplicationTableProps } from "@/types/job-application-types";
+import DeleteModal from "../modals/DeleteModal";
+
+// ... (Tipe dan impor lainnya tetap sama)
 
 // Komponen utama
 const JobApplicationTable = ({
@@ -48,10 +53,10 @@ const JobApplicationTable = ({
   statusFilter,
   onStatusChange,
 }: JobApplicationTableProps) => {
-  // State untuk search
   const [globalFilter, setGlobalFilter] = useState("");
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
 
-  // Definisi kolom untuk TanStack Table
   const columns: ColumnDef<JobApplication>[] = [
     {
       accessorKey: "index",
@@ -121,18 +126,21 @@ const JobApplicationTable = ({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-32">
               <DropdownMenuItem
-                onClick={() => alert(`Edit id: ${row.getValue("id")}`)}
-              >
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
                 onClick={() => alert(`Detail id: ${row.getValue("id")}`)}
               >
                 Detail
               </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => alert(`Edit id: ${row.getValue("id")}`)}
+              >
+                Edit
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                onClick={() => alert(`Hapus id: ${row.getValue("id")}`)}
+                onSelect={() => {
+                  setSelectedJobId(row.getValue("id"));
+                  setDeleteModalOpen(true);
+                }}
               >
                 Delete
               </DropdownMenuItem>
@@ -144,7 +152,6 @@ const JobApplicationTable = ({
     },
   ];
 
-  // Inisialisasi TanStack Table
   const table = useReactTable({
     data: data ?? [],
     columns,
@@ -170,7 +177,6 @@ const JobApplicationTable = ({
         </CardHeader>
         <CardContent>
           <div className="mb-4 flex justify-between items-center flex-col gap-4 md:flex-row">
-            {/* Search Input */}
             <Input
               placeholder="Search by job position / job portal..."
               value={globalFilter ?? ""}
@@ -187,7 +193,6 @@ const JobApplicationTable = ({
                   {STATUS_OPTIONS.map((status, idx) => {
                     const key = Object.keys(status)[0];
                     const value = Object.values(status)[0];
-
                     return (
                       <SelectItem key={idx} value={value.toString()}>
                         {key === "All" ? "All Statuses" : key}
@@ -198,8 +203,6 @@ const JobApplicationTable = ({
               </Select>
             </span>
           </div>
-
-          {/* Table */}
           <Table>
             <TableHeader className="sticky top-0 z-10 bg-muted">
               {table.getHeaderGroups().map((headerGroup) => (
@@ -235,8 +238,6 @@ const JobApplicationTable = ({
           {data?.length === 0 && (
             <div className="text-center py-4">No applications found</div>
           )}
-
-          {/* Pagination Controls */}
           {data && data.length > 0 && (
             <div className="flex items-center justify-between mt-4">
               <div className="flex items-center space-x-2">
@@ -307,6 +308,16 @@ const JobApplicationTable = ({
           )}
         </CardContent>
       </Card>
+      {selectedJobId && (
+        <DeleteModal
+          jobApplicationId={selectedJobId}
+          isOpen={deleteModalOpen}
+          onClose={() => {
+            setDeleteModalOpen(false);
+            setSelectedJobId(null);
+          }}
+        />
+      )}
     </>
   );
 };

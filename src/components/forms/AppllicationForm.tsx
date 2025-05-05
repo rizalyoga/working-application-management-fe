@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -73,6 +73,12 @@ const JobApplicationForm = () => {
     },
   });
 
+  useEffect(() => {
+    if (!open) {
+      reset();
+    }
+  }, [open]);
+
   // Ambil nilai application_date untuk ditampilkan di datepicker
   const selectedDate = watch("application_date");
 
@@ -107,7 +113,7 @@ const JobApplicationForm = () => {
         description: error.message,
         position: "top-right",
       });
-      console.error("Gagal menyimpan lamaran", error);
+      console.error("Failed to store applications", error);
     },
   });
 
@@ -259,7 +265,7 @@ const JobApplicationForm = () => {
           </div>
           <DialogFooter>
             <Button type="submit" disabled={mutation.isPending}>
-              {mutation.isPending ? "Menyimpan..." : "Simpan"}
+              {mutation.isPending ? "Saving..." : "Save"}
             </Button>
           </DialogFooter>
         </form>

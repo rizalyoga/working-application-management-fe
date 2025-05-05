@@ -39,7 +39,7 @@ const NavbarComponent = () => {
     <>
       <nav
         className={`
-        bg-white shadow-sm fixed w-full top-0 transition-transform duration-300 z-50
+        bg-white shadow-sm fixed w-full top-0 transition-transform duration-300 z-50 dark:bg-primary
         ${isVisible ? "translate-y-0" : "-translate-y-full"}
       `}
       >
