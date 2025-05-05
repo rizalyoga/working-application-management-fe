@@ -46,11 +46,11 @@ const DeleteModal = ({
       onClose(); // Tutup modal setelah sukses
     },
     onError: (error) => {
-      toast(`Gagal menghapus aplikasi!`, {
+      toast(`Failed to delete the application!`, {
         description: error.message,
         position: "top-right",
       });
-      console.error("Gagal menghapus aplikasi:", error);
+      console.error("Failed to delete the application:", error);
     },
   });
 

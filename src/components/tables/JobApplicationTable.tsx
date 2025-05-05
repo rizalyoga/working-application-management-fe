@@ -44,6 +44,7 @@ import { RxDoubleArrowLeft, RxDoubleArrowRight } from "react-icons/rx";
 import { getStatusVariant, STATUS_OPTIONS } from "@/lib/helper-table";
 import JobApplicationForm from "../forms/AppllicationForm";
 import DeleteModal from "../modals/DeleteModal";
+import DetailApplicationModal from "../modals/DetailApplicationModal";
 
 // ... (Tipe dan impor lainnya tetap sama)
 
@@ -55,6 +56,8 @@ const JobApplicationTable = ({
 }: JobApplicationTableProps) => {
   const [globalFilter, setGlobalFilter] = useState("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [detailApplicationModalOpen, setdetailApplicationModalOpen] =
+    useState(false);
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
 
   const columns: ColumnDef<JobApplication>[] = [
@@ -126,7 +129,10 @@ const JobApplicationTable = ({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-32">
               <DropdownMenuItem
-                onClick={() => alert(`Detail id: ${row.getValue("id")}`)}
+                onSelect={() => {
+                  setSelectedJobId(row.getValue("id"));
+                  setdetailApplicationModalOpen(true);
+                }}
               >
                 Detail
               </DropdownMenuItem>
@@ -314,6 +320,16 @@ const JobApplicationTable = ({
           isOpen={deleteModalOpen}
           onClose={() => {
             setDeleteModalOpen(false);
+            setSelectedJobId(null);
+          }}
+        />
+      )}
+      {selectedJobId && (
+        <DetailApplicationModal
+          jobApplicationId={selectedJobId}
+          isOpen={detailApplicationModalOpen}
+          onClose={() => {
+            setdetailApplicationModalOpen(false);
             setSelectedJobId(null);
           }}
         />

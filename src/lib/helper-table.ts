@@ -1,6 +1,6 @@
 // Fungsi untuk memformat status badge
 export const getStatusVariant = (status: string) => {
-  switch (status.toLowerCase()) {
+  switch (status?.toLowerCase()) {
     case "apply":
       return "bg-lime-500";
     case "screening":

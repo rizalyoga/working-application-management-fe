@@ -14,6 +14,13 @@ export interface ApiResponseForJobApplications {
   data: JobApplication[];
 }
 
+export interface ApiResponseForJobApplicationByID {
+  status: string;
+  status_code: number;
+  message: string;
+  data: JobApplication;
+}
+
 // Interface untuk response refresh token
 export interface RefreshTokenResponse {
   status: string;
