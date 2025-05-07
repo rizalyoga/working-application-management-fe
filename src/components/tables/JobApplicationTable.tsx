@@ -45,6 +45,7 @@ import { getStatusVariant, STATUS_OPTIONS } from "@/lib/helper-table";
 import JobApplicationForm from "../forms/AppllicationForm";
 import DeleteModal from "../modals/DeleteModal";
 import DetailApplicationModal from "../modals/DetailApplicationModal";
+import EditJobApplicationForm from "../forms/EditApplicationForm";
 
 // ... (Tipe dan impor lainnya tetap sama)
 
@@ -56,6 +57,7 @@ const JobApplicationTable = ({
 }: JobApplicationTableProps) => {
   const [globalFilter, setGlobalFilter] = useState("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const [detailApplicationModalOpen, setdetailApplicationModalOpen] =
     useState(false);
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
@@ -137,7 +139,10 @@ const JobApplicationTable = ({
                 Detail
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => alert(`Edit id: ${row.getValue("id")}`)}
+                onSelect={() => {
+                  setSelectedJobId(row.getValue("id"));
+                  setEditModalOpen(true);
+                }}
               >
                 Edit
               </DropdownMenuItem>
@@ -330,6 +335,16 @@ const JobApplicationTable = ({
           isOpen={detailApplicationModalOpen}
           onClose={() => {
             setdetailApplicationModalOpen(false);
+            setSelectedJobId(null);
+          }}
+        />
+      )}
+      {selectedJobId && (
+        <EditJobApplicationForm
+          jobApplicationId={selectedJobId}
+          isOpen={editModalOpen}
+          onClose={() => {
+            setEditModalOpen(false);
             setSelectedJobId(null);
           }}
         />

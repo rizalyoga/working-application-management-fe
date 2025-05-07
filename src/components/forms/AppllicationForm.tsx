@@ -35,26 +35,14 @@ import { fetchAPI } from "@/lib/API/auth";
 import { format } from "date-fns";
 import { ApiResponseForJobApplications } from "@/types/API-types";
 import { toast } from "sonner";
-
-// Skema validasi menggunakan Zod
-const formSchema = z.object({
-  company_name: z.string().min(1, "Nama perusahaan wajib diisi"),
-  job_position: z.string().min(1, "Posisi pekerjaan wajib diisi"),
-  job_portal: z.string().min(1, "Portal pekerjaan wajib diisi"),
-  application_date: z.date({
-    required_error: "Tanggal aplikasi wajib diisi",
-  }),
-  status_id: z.string().min(1, "Status aplikasi wajib dipilih"),
-  notes: z.string().optional(),
-});
-
-// Tipe data untuk form
+import { formApplicationSchema } from "@/lib/form-validator/application-form-validator";
 
 const JobApplicationForm = () => {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
 
-  type FormData = z.infer<typeof formSchema>;
+  type FormData = z.infer<typeof formApplicationSchema>;
+
   // Inisialisasi react-hook-form
   const {
     register,
@@ -64,7 +52,7 @@ const JobApplicationForm = () => {
     watch,
     reset,
   } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formApplicationSchema),
     defaultValues: {
       company_name: "",
       job_position: "",

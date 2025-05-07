@@ -53,14 +53,14 @@ const NavbarDashboard = () => {
   return (
     <nav
       className={
-        "shadow-sm fixed w-full top-0 transition-transform duration-300 z-50 dark:border-b dark:border-b-gray-500/35"
+        "shadow-sm fixed bg-primary-foreground w-full top-0 transition-transform duration-300 z-50 dark:border-b dark:border-b-gray-500/35 dark:bg-dark"
       }
     >
       <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-            <Briefcase />
-            <span className="text-xl font-bold text-dark">JobTrack</span>
+            <Briefcase className="text-primary" />
+            <span className="text-xl font-bold text-primary">JobTrack</span>
           </div>
           <div className="flex gap-2">
             <ModeToggle />
