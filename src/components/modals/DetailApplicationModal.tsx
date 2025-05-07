@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { ApiResponseForJobApplicationByID } from "@/types/API-types";
 import { formatDate } from "@/lib/utils";
 import { getStatusVariant } from "@/lib/helper-table";
+import DetailModalSkeleton from "../skeletons/DetailModalSkeleton";
 
 interface DetailApplicationModalProps {
   jobApplicationId: string;
@@ -26,15 +27,17 @@ const DetailApplicationModal = ({
   onClose,
 }: DetailApplicationModalProps) => {
   const BASE_URL = process.env.REACT_APP_API_BASE_URL;
-  const { data, error } = useQuery<ApiResponseForJobApplicationByID>({
-    queryKey: ["jobApplications", jobApplicationId],
-    queryFn: () =>
-      fetchAPI<ApiResponseForJobApplicationByID>(
-        `${BASE_URL}/job-applications/${jobApplicationId}`,
-        "GET",
-        true
-      ),
-  });
+  const { data, error, isLoading } = useQuery<ApiResponseForJobApplicationByID>(
+    {
+      queryKey: ["jobApplications", jobApplicationId],
+      queryFn: () =>
+        fetchAPI<ApiResponseForJobApplicationByID>(
+          `${BASE_URL}/job-applications/${jobApplicationId}`,
+          "GET",
+          true
+        ),
+    }
+  );
 
   if (error) {
     toast(`Failed to get data!`, {
@@ -45,48 +48,76 @@ const DetailApplicationModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px] bg-white rounded-xl shadow-2xl p-6 transition-all duration-300 ease-in-out transform">
+      <DialogContent className="sm:max-w-[500px] rounded-xl shadow-2xl p-6 transition-all duration-300 ease-in-out transform">
         <DialogHeader className="mb-4">
-          <DialogTitle className="text-2xl font-bold text-gray-800">
+          <DialogTitle className="text-xl font-bold text-primary">
             {data?.data.job_position || "Job Application Details"}
           </DialogTitle>
           <DialogDescription className="mt-2">
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-primary">
-                <span className="font-semibold ">Date:</span>
-                <span>{formatDate(data?.data.application_date as string)}</span>
-              </div>
-              <div className="flex items-center gap-2 text-primary">
-                <span className="font-semibold ">Company:</span>
-                <span>{data?.data.company_name}</span>
-              </div>
-              <div className="flex items-center gap-2 text-primary">
-                <span className="font-semibold ">Position:</span>
-                <span>{data?.data.job_position}</span>
-              </div>
-              <div className="flex items-center gap-2 text-primary">
-                <span className="font-semibold ">Portal:</span>
-                <span>{data?.data.job_portal}</span>
-              </div>
-              <div className="flex items-center gap-2 text-primary">
-                <span className="font-semibold ">Status:</span>
-                <span
-                  className={`inline-block px-2 py-1 rounded-full text-sm text-white ${getStatusVariant(
-                    data?.data?.status as string
-                  )}`}
-                >
-                  {data?.data.status}
-                </span>
-              </div>
-              {data?.data.notes && (
-                <div className="mt-4 text-primary">
-                  <span className="font-semibold ">Notes:</span>
-                  <p className="mt-1 bg-gray-50 p-3 rounded-lg ">
-                    {data.data.notes}
-                  </p>
-                </div>
-              )}
-            </div>
+            {isLoading ? (
+              <DetailModalSkeleton />
+            ) : (
+              <>
+                <table className="w-full text-left text-gray-600">
+                  <tbody>
+                    <tr className="border-b border-gray-200">
+                      <th className="py-2 pr-4 font-semibold text-primary w-1/3">
+                        Date
+                      </th>
+                      <td className="py-2 text-primary">
+                        {formatDate(data?.data.application_date as string)}
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <th className="py-2 pr-4 font-semibold text-primary w-1/3">
+                        Company
+                      </th>
+                      <td className="py-2 text-primary">
+                        {data?.data.company_name}
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <th className="py-2 pr-4 font-semibold text-primary w-1/3">
+                        Position
+                      </th>
+                      <td className="py-2 text-primary">
+                        {data?.data.job_position}
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <th className="py-2 pr-4 font-semibold text-primary w-1/3">
+                        Portal
+                      </th>
+                      <td className="py-2 text-primary">
+                        {data?.data.job_portal}
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <th className="py-2 pr-4 font-semibold text-primary w-1/3">
+                        Status
+                      </th>
+                      <td className="py-2">
+                        <span
+                          className={`inline-block px-2 py-1 rounded-full text-sm text-white ${getStatusVariant(
+                            data?.data.status as string
+                          )}`}
+                        >
+                          {data?.data.status}
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                {data?.data.notes && (
+                  <div className="mt-4">
+                    <span className="font-semibold text-primary">Notes:</span>
+                    <p className="mt-2 text-primary bg-secondary p-3 rounded-lg">
+                      {data.data.notes}
+                    </p>
+                  </div>
+                )}
+              </>
+            )}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="mt-6">

@@ -6,6 +6,7 @@ import { fetchAPI } from "@/lib/API/auth";
 import { Card, CardContent } from "@/components/ui/card";
 import { ApiResponseForJobApplications } from "@/types/API-types";
 import JobApplicationTable from "@/components/tables/JobApplicationTable";
+import JobApplicationTableSkeleton from "@/components/skeletons/JobApplicationTableSkeleton";
 
 const DashboardIndex = () => {
   const BASE_URL = useMemo(() => process.env.REACT_APP_API_BASE_URL, []);
@@ -61,24 +62,7 @@ const DashboardIndex = () => {
   });
 
   if (isLoading) {
-    return (
-      <DashboardLayout>
-        <Card>
-          <CardContent className="p-6 min-h-dvh">
-            <div className="mt-28 max-w-7xl border border-slate-400 h-64 rounded-xl mx-auto px-4 sm:px-6 lg:px-8 bg-slate-200 shadow-2xl mb-2 animate-pulse flex justify-center flex-col gap-2 py-6 dark:bg-black">
-              <p className="text-black dark:text-white text-start font-bold mb-5">
-                Job Applications
-              </p>
-              <div className="w-full bg-slate-400 border rounded-md h-10"></div>
-              <div className="w-full bg-slate-400 border rounded-md h-10"></div>
-              <div className="w-full bg-slate-400 border rounded-md h-10"></div>
-              <div className="w-full bg-slate-400 border rounded-md h-10"></div>
-              <div className="w-full bg-slate-400 border rounded-md h-10"></div>
-            </div>
-          </CardContent>
-        </Card>
-      </DashboardLayout>
-    );
+    return <JobApplicationTableSkeleton />;
   }
 
   if (error) {
