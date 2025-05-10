@@ -287,7 +287,10 @@ const EditJobApplicationForm = ({
                 value={watch("status_id")}
               >
                 <SelectTrigger className="col-span-3 w-full">
-                  <SelectValue placeholder="Select status" />
+                  <SelectValue
+                    className="placeholder:text-primary"
+                    placeholder={data?.data.status}
+                  />
                 </SelectTrigger>
                 <SelectContent>
                   {STATUS_OPTIONS.map((status, idx) => {

@@ -4,7 +4,7 @@ const HeroSectionComponent = () => {
   return (
     <div className="relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+        <div className="relative z-10 pb-8 bg-white dark:bg-[#0A0A0A] sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
           <main className="mt-24 mx-auto max-w-7xl px-4 sm:mt-28 sm:px-6 md:mt-32 lg:mt-44 lg:px-8 xl:mt-48">
             <div className="sm:text-center lg:text-left">
               <h1 className="text-4xl tracking-tight font-extrabold text-dark sm:text-5xl md:text-6xl">
@@ -20,7 +20,7 @@ const HeroSectionComponent = () => {
                 <div className="rounded-md shadow">
                   <Link
                     to="/register"
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 md:py-4 md:text-lg md:px-10"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary dark:bg-primary-foreground hover:bg-primary/90 md:py-4 md:text-lg md:px-10"
                   >
                     Start Tracking Now
                   </Link>
@@ -28,7 +28,7 @@ const HeroSectionComponent = () => {
                 <div className="mt-3 sm:mt-0 sm:ml-3">
                   <a
                     href="#demo"
-                    className="w-full flex items-center justify-center px-8 py-3 border text-base font-medium rounded-md text-primary bg-white transition duration-200 hover:border-primary md:py-4 md:text-lg md:px-10"
+                    className="w-full flex items-center justify-center px-8 py-3 border text-base font-medium rounded-md text-primary dark:text-black bg-white transition duration-200 hover:border-primary md:py-4 md:text-lg md:px-10"
                   >
                     Watch Demo
                   </a>

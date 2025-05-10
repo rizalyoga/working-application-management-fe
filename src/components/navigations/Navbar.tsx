@@ -39,7 +39,7 @@ const NavbarComponent = () => {
     <>
       <nav
         className={`
-        bg-white shadow-sm fixed w-full top-0 transition-transform duration-300 z-50 dark:bg-primary
+        bg-primary-foreground shadow-sm fixed w-full top-0 transition-transform duration-300 z-50
         ${isVisible ? "translate-y-0" : "-translate-y-full"}
       `}
       >
@@ -104,7 +104,7 @@ const NavbarComponent = () => {
 
                     <NavLink
                       to="/register"
-                      className="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                      className="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                     >
                       Get Started
                     </NavLink>

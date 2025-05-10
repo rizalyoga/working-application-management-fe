@@ -1,6 +1,9 @@
 const HowItWorkSection = () => {
   return (
-    <section id="how-it-works" className="py-12 bg-gray-50">
+    <section
+      id="how-it-works"
+      className="py-12 bg-gray-50 dark:bg-primary-foreground"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base text-primary font-semibold tracking-wide uppercase">
@@ -20,10 +23,10 @@ const HowItWorkSection = () => {
             <div className="space-y-8">
               {/* <!-- Step 1 --> */}
               <div className="timeline-item relative pl-16">
-                <div className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white">
+                <div className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary  dark:bg-black text-white">
                   <span>1</span>
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="bg-white dark:bg-black p-6 rounded-lg shadow-sm">
                   <h3 className="text-lg font-medium text-dark">
                     Add Your Application
                   </h3>
@@ -36,10 +39,10 @@ const HowItWorkSection = () => {
 
               {/* <!-- Step 2 --> */}
               <div className="timeline-item relative pl-16">
-                <div className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white">
+                <div className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary  dark:bg-black text-white">
                   <span>2</span>
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="bg-white dark:bg-black p-6 rounded-lg shadow-sm">
                   <h3 className="text-lg font-medium text-dark">
                     Upload Documents
                   </h3>
@@ -52,10 +55,10 @@ const HowItWorkSection = () => {
 
               {/* <!-- Step 3 --> */}
               <div className="timeline-item relative pl-16">
-                <div className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white">
+                <div className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary  dark:bg-black text-white">
                   <span>3</span>
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="bg-white dark:bg-black p-6 rounded-lg shadow-sm">
                   <h3 className="text-lg font-medium text-dark">
                     Track Progress
                   </h3>
@@ -68,10 +71,10 @@ const HowItWorkSection = () => {
 
               {/* <!-- Step 4 --> */}
               <div className="timeline-item relative pl-16">
-                <div className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white">
+                <div className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary  dark:bg-black text-white">
                   <span>4</span>
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="bg-white dark:bg-black p-6 rounded-lg shadow-sm">
                   <h3 className="text-lg font-medium text-dark">Get Hired!</h3>
                   <p className="mt-2 text-gray-500">
                     Celebrate your success and use our tools to prepare for your

@@ -2,7 +2,10 @@ import { FaStar, FaStarHalf } from "react-icons/fa6";
 
 const TestimonialSection = () => {
   return (
-    <section id="testimonials" className="py-12 bg-white">
+    <section
+      id="testimonials"
+      className="py-12 bg-white dark:bg-primary-foreground"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base text-primary font-semibold tracking-wide uppercase">
@@ -18,7 +21,7 @@ const TestimonialSection = () => {
 
         <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {/* <!-- Testimonial 1 --> */}
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+          <div className="bg-gray-50 p-6 rounded-lg shadow-sm dark:bg-black dark:border dark:border-slate-500/50">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <img
@@ -49,7 +52,7 @@ const TestimonialSection = () => {
           </div>
 
           {/* <!-- Testimonial 2 --> */}
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+          <div className="bg-gray-50 p-6 rounded-lg shadow-sm dark:bg-black dark:border dark:border-slate-500/50">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <img
@@ -79,7 +82,7 @@ const TestimonialSection = () => {
           </div>
 
           {/* <!-- Testimonial 3 --> */}
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+          <div className="bg-gray-50 p-6 rounded-lg shadow-sm dark:bg-black dark:border dark:border-slate-500/50">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <img

@@ -116,10 +116,8 @@ const LoginComponent = () => {
       <div className="min-h-screen flex items-center justify-center flex-col py-12 sm:px-6 lg:px-8 mt-8">
         <div className="flex flex-col justify-center items-center mb-8">
           <FaBriefcase className="text-primary text-5xl mb-4 text-center" />
-          <h2 className="text-3xl font-extrabold text-gray-900">
-            Welcome Back
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <h2 className="text-3xl font-extrabold text-primary">Welcome Back</h2>
+          <p className="mt-2 text-sm text-gray-600 dark:text-primary">
             Sign in to continue tracking your job applications
           </p>
         </div>

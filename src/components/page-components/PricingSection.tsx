@@ -2,7 +2,10 @@ import { Link } from "react-router";
 
 const PricingSection = () => {
   return (
-    <section id="pricing" className="py-12 bg-gray-50">
+    <section
+      id="pricing"
+      className="py-12 bg-gray-50 dark:bg-primary-foreground"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base text-primary font-semibold tracking-wide uppercase">
@@ -18,7 +21,7 @@ const PricingSection = () => {
 
         <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* <!-- Free Plan --> */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="bg-white dark:bg-black dark:border dark:border-slate-500/50 rounded-lg shadow-md overflow-hidden">
             <div className="px-6 py-8">
               <h3 className="text-lg font-medium text-dark">Free</h3>
               <div className="mt-4 flex items-baseline">
@@ -31,7 +34,7 @@ const PricingSection = () => {
                 Perfect for casual job seekers
               </p>
             </div>
-            <div className="px-6 pt-6 pb-8 bg-gray-50">
+            <div className="px-6 pt-6 pb-8 bg-gray-50 dark:bg-black">
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <i className="fas fa-check text-green-500 mt-1 mr-2"></i>
@@ -62,11 +65,11 @@ const PricingSection = () => {
           </div>
 
           {/* <!-- Pro Plan --> */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden transform scale-105 border-2 border-primary">
+          <div className="bg-white dark:bg-black rounded-lg shadow-lg overflow-hidden transform scale-105 border-2 border-primary dark:border-slate-500/50">
             <div className="px-6 py-8 bg-primary/5">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-medium text-dark">Pro</h3>
-                <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-primary text-white">
+                <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-primary text-white dark:text-black">
                   Most Popular
                 </span>
               </div>
@@ -78,7 +81,7 @@ const PricingSection = () => {
               </div>
               <p className="mt-4 text-gray-500">For serious job seekers</p>
             </div>
-            <div className="px-6 pt-6 pb-8 bg-gray-50">
+            <div className="px-6 pt-6 pb-8 bg-gray-50 dark:bg-black">
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <i className="fas fa-check text-green-500 mt-1 mr-2"></i>
@@ -110,7 +113,7 @@ const PricingSection = () => {
               <div className="mt-8">
                 <Link
                   to="/register"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary/90"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white dark:text-black bg-primary hover:bg-primary/90"
                 >
                   Get Started
                 </Link>
@@ -119,7 +122,7 @@ const PricingSection = () => {
           </div>
 
           {/* <!-- Team Plan --> */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="bg-white dark:bg-black dark:border dark:border-slate-500/50 rounded-lg shadow-md overflow-hidden">
             <div className="px-6 py-8">
               <h3 className="text-lg font-medium text-dark">Team</h3>
               <div className="mt-4 flex items-baseline">
@@ -130,7 +133,7 @@ const PricingSection = () => {
               </div>
               <p className="mt-4 text-gray-500">For career coaches and teams</p>
             </div>
-            <div className="px-6 pt-6 pb-8 bg-gray-50">
+            <div className="px-6 pt-6 pb-8 bg-gray-50 dark:bg-black">
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <i className="fas fa-check text-green-500 mt-1 mr-2"></i>

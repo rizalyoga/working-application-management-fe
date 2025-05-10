@@ -40,7 +40,7 @@ const NavbarDashboard = () => {
         removeCookie("access_token");
         removeCookie("refresh_token");
         removeCookie("refresh_token");
-        setTheme("light");
+        // setTheme("light");
         navigate("/login");
       })
       .catch((error) => {
@@ -60,7 +60,12 @@ const NavbarDashboard = () => {
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer">
             <Briefcase className="text-primary" />
-            <span className="text-xl font-bold text-primary">JobTrack</span>
+            <span
+              className="text-xl font-bold text-primary"
+              onClick={() => navigate("/")}
+            >
+              JobTrack
+            </span>
           </div>
           <div className="flex gap-2">
             <ModeToggle />
