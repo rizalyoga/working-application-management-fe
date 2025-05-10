@@ -18,11 +18,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ModeToggle } from "../toggles/ModeToggle";
 import useProfileUserStore from "@/stores/useProfileStore";
-import { useTheme } from "@/components/layout/ThemeProvider";
 
 const NavbarDashboard = () => {
   const navigate = useNavigate();
-  const { setTheme } = useTheme();
   const { name, profile_picture_url } = useProfileUserStore();
 
   const logoutFunction = async (): Promise<APIResponse> => {
@@ -40,7 +38,6 @@ const NavbarDashboard = () => {
         removeCookie("access_token");
         removeCookie("refresh_token");
         removeCookie("refresh_token");
-        // setTheme("light");
         navigate("/login");
       })
       .catch((error) => {
