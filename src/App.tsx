@@ -6,6 +6,7 @@ import PrivateRoute from "./components/layout/PrivatePage";
 import DashboardIndexView from "./components/pages/Dashboard/Index";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "./components/layout/ThemeProvider";
+import ProfilePage from "./components/pages/Dashboard/ProfilePage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="login" element={<LoginView />} />
           <Route path="dashboard" element={<PrivateRoute />}>
             <Route index element={<DashboardIndexView />} />
+            <Route path="profile" element={<ProfilePage />} />
           </Route>
         </Routes>
       </ThemeProvider>

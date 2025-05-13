@@ -35,7 +35,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
       {/* Sidebar */}
       <div
         className={`
-          fixed top-0 left-0 w-full bg-white z-50 transform transition-transform duration-300 ease-in-out
+          fixed top-0 left-0 w-full bg-primary-foreground z-50 transform transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-y-0" : "-translate-y-full"}
           lg:hidden
         `}
@@ -84,7 +84,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
           <div className="flex flex-col space-y-2 pt-4 border-t">
             <NavLink
               to="/register"
-              className="text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              className="text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               onClick={toggleSidebar}
             >
               Get Started

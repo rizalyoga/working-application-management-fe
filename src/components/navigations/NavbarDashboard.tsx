@@ -1,7 +1,7 @@
 import { fetchAPI } from "@/lib/API/auth";
 import { APIResponse } from "@/types/API-types";
 import { toast } from "sonner";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { removeCookie } from "@/lib/cookies/cookies";
 
 import { Briefcase } from "lucide-react";
@@ -33,7 +33,9 @@ const NavbarDashboard = () => {
       .then((res) => {
         toast("Good Bye! 👋", {
           description: res.message,
-          position: "top-right",
+          position: "bottom-right",
+          closeButton: true,
+          className: "dark:text-white",
         });
         removeCookie("access_token");
         removeCookie("refresh_token");
@@ -43,7 +45,9 @@ const NavbarDashboard = () => {
       .catch((error) => {
         toast(`Logout failed!`, {
           description: error.message,
-          position: "top-right",
+          position: "bottom-right",
+          closeButton: true,
+          className: "dark:text-white",
         });
       });
   };
@@ -81,10 +85,14 @@ const NavbarDashboard = () => {
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-36">
-                <DropdownMenuLabel>{name}</DropdownMenuLabel>
+                <Link to={"/dashboard"}>
+                  <DropdownMenuLabel>{name}</DropdownMenuLabel>
+                </Link>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <Link to={"/dashboard/profile"}>
+                    <DropdownMenuItem>Profile</DropdownMenuItem>
+                  </Link>
                   <DropdownMenuItem>Chart</DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />

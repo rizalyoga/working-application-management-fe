@@ -72,7 +72,9 @@ const LoginComponent = () => {
       form.reset();
       toast(`Login Successfull! 🥰`, {
         description: `Welcome Back ${data.data.user.name}`,
-        position: "top-right",
+        position: "bottom-right",
+        closeButton: true,
+        className: "dark:text-white",
       });
 
       updateName(data.data?.user.name);
@@ -101,7 +103,9 @@ const LoginComponent = () => {
       });
       toast(`Login failed!`, {
         description: error.message,
-        position: "top-right",
+        position: "bottom-right",
+        closeButton: true,
+        className: "dark:text-white",
       });
     },
   });
