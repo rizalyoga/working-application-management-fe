@@ -5,40 +5,33 @@ import useProfileUserStore from "@/stores/useProfileStore";
 import NavbarDashboardComponent from "../navigations/NavbarDashboard";
 import { APIResponse } from "@/types/API-types";
 import { ThemeProvider } from "next-themes";
+import { useQuery } from "@tanstack/react-query";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
-  const profileData = useProfileUserStore();
+  const profileDataStore = useProfileUserStore();
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+  const { data } = useQuery<APIResponse>({
+    queryKey: ["userProfile"],
+    queryFn: () =>
+      fetchAPI<APIResponse>(`${BASE_URL}/user/profile-data`, "GET", true),
+  });
+
   useEffect(() => {
     const {
-      updateEmail,
       updateName,
+      updateEmail,
       updatePhoneNumber,
       updateProfilePictureUrl,
       updateResumeUrl,
-    } = profileData;
+    } = profileDataStore;
 
-    const getUserData = async (): Promise<APIResponse> => {
-      const BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
-      return await fetchAPI<APIResponse>(
-        `${BASE_URL}/user/profile-data`,
-        "GET",
-        true
-      );
-    };
-
-    getUserData()
-      .then((res) => {
-        updateName(res.data[0].name);
-        updateEmail(res.data[0].email);
-        updatePhoneNumber(res.data[0].phone_number);
-        updateProfilePictureUrl(res.data[0].profile_picture_url);
-        updateResumeUrl(res.data[0].resume_url);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+    updateName(data?.data[0]?.name);
+    updateEmail(data?.data[0]?.email);
+    updatePhoneNumber(data?.data[0]?.phone_number);
+    updateProfilePictureUrl(data?.data[0]?.profile_picture_url);
+    updateResumeUrl(data?.data[0]?.resume_url);
+  }, [data]);
 
   return (
     <>

@@ -71,7 +71,7 @@ const RegisterComponent = () => {
       form.reset();
       toast("Account was successfully created!", {
         description: data.message,
-        position: "top-right",
+        position: "bottom-right",
       });
 
       setCookie("access_token", data.data?.tokens.access_token, 1);
@@ -86,7 +86,7 @@ const RegisterComponent = () => {
       });
       toast(`Registration failed!`, {
         description: error.message,
-        position: "top-right",
+        position: "bottom-right",
       });
     },
   });

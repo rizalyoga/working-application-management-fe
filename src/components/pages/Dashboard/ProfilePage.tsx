@@ -1,4 +1,5 @@
 import DashboardLayout from "@/components/layout/DashboarLayout";
+import ProfileUserForm from "@/components/forms/ProfileUserForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const ProfilePage = () => {
@@ -7,12 +8,12 @@ const ProfilePage = () => {
       <div className="mt-28 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Card>
           <CardHeader>
-            <CardTitle>Profile User</CardTitle>
+            <CardTitle>User Profile</CardTitle>
           </CardHeader>
         </Card>
       </div>
 
-      <div className="mt-14 flex flex-col gap-8 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mt-8 flex flex-col gap-8 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <Card>
           <CardHeader>
             <CardTitle>Photo Profile</CardTitle>
@@ -29,10 +30,7 @@ const ProfilePage = () => {
             <CardTitle>Profile Data</CardTitle>
           </CardHeader>
           <CardContent>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet odio
-            quaerat optio obcaecati accusantium modi vero eligendi eum quos
-            nesciunt. Cupiditate cumque ab hic dolorum sapiente, necessitatibus
-            reprehenderit ipsum consectetur.
+            <ProfileUserForm />
           </CardContent>
         </Card>
         <Card>

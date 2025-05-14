@@ -112,7 +112,7 @@ const EditJobApplicationForm = ({
     if (error) {
       toast(`Failed to load application data!`, {
         description: error.message,
-        position: "top-right",
+        position: "bottom-right",
       });
     }
   }, [error]);
@@ -140,14 +140,14 @@ const EditJobApplicationForm = ({
       queryClient.invalidateQueries({ queryKey: ["jobApplications"] });
       reset();
       toast(`${data.message}! 🥰`, {
-        position: "top-right",
+        position: "bottom-right",
       });
       onClose();
     },
     onError: (error) => {
       toast(`Failed to update application!`, {
         description: error.message,
-        position: "top-right",
+        position: "bottom-right",
       });
       console.error("Failed to update application", error);
     },

@@ -68,20 +68,22 @@ const DashboardIndex = () => {
   if (error) {
     return (
       <DashboardLayout>
-        <Card>
-          <CardContent className="p-6 mt-28">
-            <div className="text-center text-red-500">
-              Error: {(error as Error).message}
-            </div>
-          </CardContent>
-        </Card>
+        <div className="mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+          <Card>
+            <CardContent className="p-6">
+              <p className="text-center text-red-500">
+                {(error as Error).message}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
       </DashboardLayout>
     );
   }
 
   return (
     <DashboardLayout>
-      <div className="mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <JobApplicationTable
           data={data?.data}
           statusFilter={statusFilter}

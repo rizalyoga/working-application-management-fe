@@ -12,7 +12,6 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -86,14 +85,16 @@ const NavbarDashboard = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-36">
                 <Link to={"/dashboard"}>
-                  <DropdownMenuLabel>{name}</DropdownMenuLabel>
+                  <DropdownMenuItem className="font-semibold cursor-pointer">
+                    {name}
+                  </DropdownMenuItem>
                 </Link>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <Link to={"/dashboard/profile"}>
                     <DropdownMenuItem>Profile</DropdownMenuItem>
                   </Link>
-                  <DropdownMenuItem>Chart</DropdownMenuItem>
+                  <DropdownMenuItem>Resume</DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
