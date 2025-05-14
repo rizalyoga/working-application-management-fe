@@ -67,7 +67,7 @@ const ProfileUserForm = () => {
       });
     },
     onError: (error) => {
-      toast(`Failed to update application!`, {
+      toast(`Failed to update application! 😢`, {
         description: error.message,
         position: "bottom-right",
       });

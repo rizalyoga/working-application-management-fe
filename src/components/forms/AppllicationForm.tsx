@@ -92,14 +92,14 @@ const JobApplicationForm = () => {
       queryClient.invalidateQueries({ queryKey: ["jobApplications"] });
       reset();
       toast(`${data.message}! 🥰`, {
-        position: "top-right",
+        position: "bottom-right",
       });
       setOpen(false);
     },
     onError: (error) => {
-      toast(`Create new application failed!`, {
+      toast(`Create new application failed!  😢`, {
         description: error.message,
-        position: "top-right",
+        position: "bottom-right",
       });
       console.error("Failed to store applications", error);
     },

@@ -41,14 +41,14 @@ const DeleteModal = ({
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["jobApplications"] });
       toast(`${data.message}! 🥰`, {
-        position: "top-right",
+        position: "bottom-right",
       });
       onClose(); // Tutup modal setelah sukses
     },
     onError: (error) => {
-      toast(`Failed to delete the application!`, {
+      toast(`Failed to delete the application!  😢`, {
         description: error.message,
-        position: "top-right",
+        position: "bottom-right",
       });
       console.error("Failed to delete the application:", error);
     },

@@ -57,7 +57,7 @@ const EditPasswordForm = () => {
     mutationFn: updatePassword,
     onSuccess: (data) => {
       methods.reset();
-      toast(data.message, {
+      toast(`${data.message}! 🥰`, {
         position: "bottom-right",
       });
     },
@@ -67,7 +67,8 @@ const EditPasswordForm = () => {
       methods.setError("root", {
         message: error.message || "Update password failed",
       });
-      toast(error.message, {
+      toast(`Update password failed 😢`, {
+        description: error.message,
         position: "bottom-right",
       });
     },
@@ -88,7 +89,12 @@ const EditPasswordForm = () => {
           name="current_password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Current Password</FormLabel>
+              <span className="flex justify-between">
+                <FormLabel>Current Password</FormLabel>
+                <p className="text-xs text-slate-500 dark:text-slate-200">
+                  Min 8 characters
+                </p>
+              </span>
               <FormControl>
                 <div className="relative">
                   <Input
@@ -119,7 +125,12 @@ const EditPasswordForm = () => {
           name="new_password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>New Password</FormLabel>
+              <span className="flex justify-between">
+                <FormLabel>New Password</FormLabel>
+                <p className="text-xs text-slate-500 dark:text-slate-200">
+                  Min 8 characters
+                </p>
+              </span>
               <FormControl>
                 <div className="relative">
                   <Input
@@ -150,7 +161,12 @@ const EditPasswordForm = () => {
           name="confirm_new_password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Confirm New Password</FormLabel>
+              <span className="flex justify-between">
+                <FormLabel>Confirm New Password</FormLabel>
+                <p className="text-xs text-slate-500 dark:text-slate-200">
+                  Min 8 characters
+                </p>
+              </span>
               <FormControl>
                 <div className="relative">
                   <Input

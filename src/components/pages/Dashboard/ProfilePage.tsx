@@ -28,7 +28,7 @@ const ProfilePage = () => {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Profile Data</CardTitle>
+            <CardTitle>Update Profile Data Form</CardTitle>
           </CardHeader>
           <CardContent>
             <ProfileUserForm />
@@ -36,7 +36,7 @@ const ProfilePage = () => {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Change Password</CardTitle>
+            <CardTitle>Update Password Form</CardTitle>
           </CardHeader>
           <CardContent>
             <EditPasswordForm />
