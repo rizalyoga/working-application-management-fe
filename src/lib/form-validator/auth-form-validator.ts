@@ -41,3 +41,20 @@ export const formUpdateUserProfileSchema = z.object({
     .min(10, "Phone number must be at least 10 digits")
     .regex(/^\+?[1-9]\d{1,14}$/, "Invalid phone number format"),
 });
+
+export const formUpdatePasswordSchema = z
+  .object({
+    current_password: z
+      .string()
+      .min(8, "Password must be at least 8 characters"),
+    new_password: z
+      .string()
+      .min(8, "New password must be at least 8 characters"),
+    confirm_new_password: z
+      .string()
+      .min(8, "New password must be at least 8 characters"),
+  })
+  .refine((data) => data.new_password === data.confirm_new_password, {
+    message: "Passwords do not match",
+    path: ["confirm_new_password"],
+  });

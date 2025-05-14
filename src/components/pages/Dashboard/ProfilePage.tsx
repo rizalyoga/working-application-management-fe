@@ -1,5 +1,6 @@
 import DashboardLayout from "@/components/layout/DashboarLayout";
 import ProfileUserForm from "@/components/forms/ProfileUserForm";
+import EditPasswordForm from "@/components/forms/EditPasswordForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const ProfilePage = () => {
@@ -38,10 +39,7 @@ const ProfilePage = () => {
             <CardTitle>Change Password</CardTitle>
           </CardHeader>
           <CardContent>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet odio
-            quaerat optio obcaecati accusantium modi vero eligendi eum quos
-            nesciunt. Cupiditate cumque ab hic dolorum sapiente, necessitatibus
-            reprehenderit ipsum consectetur.
+            <EditPasswordForm />
           </CardContent>
         </Card>
       </div>
