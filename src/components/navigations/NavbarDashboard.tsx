@@ -36,8 +36,8 @@ const NavbarDashboard = () => {
           closeButton: true,
           className: "dark:text-white",
         });
+        localStorage.removeItem("profile-storage");
         removeCookie("access_token");
-        removeCookie("refresh_token");
         removeCookie("refresh_token");
         navigate("/login");
       })

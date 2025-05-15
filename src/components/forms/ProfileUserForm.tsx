@@ -62,6 +62,11 @@ const ProfileUserForm = () => {
     mutationFn: updateUserProfileData,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+      userStore.updateName(data.data.name);
+      userStore.updateEmail(data.data.email);
+      userStore.updatePhoneNumber(data.data.phone_number);
+      console.log(data.data);
+
       toast(`${data.message}! 🥰`, {
         position: "bottom-right",
       });

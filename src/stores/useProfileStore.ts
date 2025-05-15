@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { createJSONStorage, persist, PersistOptions } from "zustand/middleware";
 
 interface UserProfileInterface {
   name: string;
@@ -18,27 +19,40 @@ type Action = {
   updateProfilePictureUrl: (
     profile_picture_url: UserProfileInterface["profile_picture_url"]
   ) => void;
-  updateResumeUrl: (resule_url: UserProfileInterface["resume_url"]) => void;
+  updateResumeUrl: (resume_url: UserProfileInterface["resume_url"]) => void;
   updateIsLoading: (is_loading: UserProfileInterface["is_loading"]) => void;
 };
 
-const useProfileUserStore = create<UserProfileInterface & Action>((set) => ({
-  name: "",
-  email: "",
-  phone_number: "",
-  profile_picture_url: "",
-  resume_url: "",
-  is_loading: false,
+// Gabungkan interface untuk state dan action
+type ProfileStore = UserProfileInterface & Action;
 
-  // action
-  updateName: (name) => set(() => ({ name: name })),
-  updateEmail: (email) => set(() => ({ email: email })),
-  updatePhoneNumber: (phone_number) =>
-    set(() => ({ phone_number: phone_number })),
-  updateProfilePictureUrl: (profile_picture_url) =>
-    set(() => ({ profile_picture_url: profile_picture_url })),
-  updateResumeUrl: (resume_url) => set(() => ({ resume_url: resume_url })),
-  updateIsLoading: (is_loading) => set({ is_loading: !is_loading }),
-}));
+// Definisikan opsi persist dengan tipe yang benar
+type PersistProfileStore = PersistOptions<ProfileStore>;
+
+const useProfileUserStore = create<ProfileStore>()(
+  persist(
+    (set) => ({
+      name: "",
+      email: "",
+      phone_number: "",
+      profile_picture_url: "",
+      resume_url: "",
+      is_loading: false,
+
+      // Action
+      updateName: (name) => set(() => ({ name })),
+      updateEmail: (email) => set(() => ({ email })),
+      updatePhoneNumber: (phone_number) => set(() => ({ phone_number })),
+      updateProfilePictureUrl: (profile_picture_url) =>
+        set(() => ({ profile_picture_url })),
+      updateResumeUrl: (resume_url) => set(() => ({ resume_url })),
+      updateIsLoading: (is_loading) => set(() => ({ is_loading })),
+    }),
+    {
+      name: "profile-storage", // Nama kunci di localStorage
+      storage: createJSONStorage(() => localStorage), // Gunakan createJSONStorage untuk kompatibilitas
+    } as PersistProfileStore
+  )
+);
 
 export default useProfileUserStore;
