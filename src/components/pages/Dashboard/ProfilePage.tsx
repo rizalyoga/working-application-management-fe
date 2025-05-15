@@ -1,16 +1,19 @@
 import DashboardLayout from "@/components/layout/DashboarLayout";
 import ProfileUserForm from "@/components/forms/ProfileUserForm";
 import EditPasswordForm from "@/components/forms/EditPasswordForm";
+import UpdateProfilePhotoForm from "@/components/forms/UpdateProfilePhotoForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import useProfileUserStore from "@/stores/useProfileStore";
 
 const ProfilePage = () => {
+  const userProfileStore = useProfileUserStore();
   return (
     <DashboardLayout>
       <div className="mt-28 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Card>
-          <CardHeader>
-            <CardTitle>User Profile</CardTitle>
-          </CardHeader>
+          <h3 className="font-bold ml-6">
+            {userProfileStore.name.toUpperCase()}
+          </h3>
         </Card>
       </div>
 
@@ -20,15 +23,12 @@ const ProfilePage = () => {
             <CardTitle>Photo Profile</CardTitle>
           </CardHeader>
           <CardContent>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet odio
-            quaerat optio obcaecati accusantium modi vero eligendi eum quos
-            nesciunt. Cupiditate cumque ab hic dolorum sapiente, necessitatibus
-            reprehenderit ipsum consectetur.
+            <UpdateProfilePhotoForm />
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Update Profile Data Form</CardTitle>
+            <CardTitle>Profile Data</CardTitle>
           </CardHeader>
           <CardContent>
             <ProfileUserForm />
@@ -36,7 +36,7 @@ const ProfilePage = () => {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Update Password Form</CardTitle>
+            <CardTitle>Password</CardTitle>
           </CardHeader>
           <CardContent>
             <EditPasswordForm />
