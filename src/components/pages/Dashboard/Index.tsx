@@ -68,7 +68,7 @@ const DashboardIndex = () => {
   if (error) {
     return (
       <DashboardLayout>
-        <div className="mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div className="mt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
           <Card>
             <CardContent className="p-6">
               <p className="text-center text-red-500">
@@ -83,7 +83,7 @@ const DashboardIndex = () => {
 
   return (
     <DashboardLayout>
-      <div className="mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+      <div className="mt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <JobApplicationTable
           data={data?.data}
           statusFilter={statusFilter}

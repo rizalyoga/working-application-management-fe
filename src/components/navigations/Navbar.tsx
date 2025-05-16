@@ -71,10 +71,10 @@ const NavbarComponent = () => {
                   How It Works
                 </a>
                 <a
-                  href="#pricing"
+                  href="#technology"
                   className="text-dark hover:text-primary px-3 py-2 text-sm font-medium"
                 >
-                  Pricing
+                  Technology
                 </a>
                 <a
                   href="#testimonials"

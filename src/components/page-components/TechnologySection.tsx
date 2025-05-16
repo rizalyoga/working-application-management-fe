@@ -23,7 +23,7 @@ const TechnologySection = () => {
         </div>
         <div className="mt-10">
           <h4 className="font-bold text-xl text-center">Front End</h4>
-          <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+          <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-4 sm:grid-cols-2">
             {frontendTech.map((item, index) => (
               <TechItem
                 name={item.name}
@@ -37,7 +37,7 @@ const TechnologySection = () => {
 
         <div className="mt-10">
           <h4 className="font-bold text-xl text-center">Back End</h4>
-          <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+          <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-4 sm:grid-cols-2">
             {backendTech.map((item, index) => (
               <TechItem
                 name={item.name}

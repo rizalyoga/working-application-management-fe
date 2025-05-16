@@ -9,14 +9,14 @@ const ProfilePage = () => {
   const userProfileStore = useProfileUserStore();
   return (
     <DashboardLayout>
-      <div className="mt-28 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mt-8 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Card>
           <h3 className="font-bold ml-6">
             {userProfileStore.name.toUpperCase()}
           </h3>
         </Card>
       </div>
-
+     
       <div className="mt-8 flex flex-col gap-8 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <Card>
           <CardHeader>
