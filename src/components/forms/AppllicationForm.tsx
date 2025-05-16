@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -118,7 +119,10 @@ const JobApplicationForm = () => {
           <span className="hidden sm:block">Add new application</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto my-4">
+      <DialogContent
+        className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto my-4"
+        onInteractOutside={(e) => e.preventDefault()}
+      >
         <DialogHeader>
           <DialogTitle>Create new application</DialogTitle>
           <DialogDescription>
@@ -252,6 +256,11 @@ const JobApplicationForm = () => {
             />
           </div>
           <DialogFooter>
+            <DialogClose asChild>
+              <Button type="button" variant="secondary">
+                Cancel
+              </Button>
+            </DialogClose>
             <Button type="submit" disabled={mutation.isPending}>
               {mutation.isPending ? "Saving..." : "Save"}
             </Button>

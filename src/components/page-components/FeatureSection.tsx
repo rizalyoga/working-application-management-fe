@@ -30,7 +30,7 @@ const FeatureSectionComponent = () => {
         <div className="mt-10">
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {/* <!-- Feature 1 --> */}
-            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black dark:border dark:border-slate-500/40 rounded-lg shadow-md overflow-hidden p-6">
+            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black rounded-lg shadow-md overflow-hidden p-6">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary/10 text-primary">
                 <FaListCheck />
               </div>
@@ -46,7 +46,7 @@ const FeatureSectionComponent = () => {
             </div>
 
             {/* <!-- Feature 2 --> */}
-            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black dark:border dark:border-slate-500/40 rounded-lg shadow-md overflow-hidden p-6">
+            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black rounded-lg shadow-md overflow-hidden p-6">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary/10 text-primary">
                 <FaCalendarCheck />
               </div>
@@ -62,7 +62,7 @@ const FeatureSectionComponent = () => {
             </div>
 
             {/* <!-- Feature 3 --> */}
-            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black dark:border dark:border-slate-500/40 rounded-lg shadow-md overflow-hidden p-6">
+            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black rounded-lg shadow-md overflow-hidden p-6">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary/10 text-primary">
                 <FaFileArrowUp />
               </div>
@@ -78,7 +78,7 @@ const FeatureSectionComponent = () => {
             </div>
 
             {/* <!-- Feature 4 --> */}
-            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black dark:border dark:border-slate-500/40 rounded-lg shadow-md overflow-hidden p-6">
+            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black rounded-lg shadow-md overflow-hidden p-6">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary/10 text-primary">
                 <FaChartLine />
               </div>
@@ -94,7 +94,7 @@ const FeatureSectionComponent = () => {
             </div>
 
             {/* <!-- Feature 5 --> */}
-            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black dark:border dark:border-slate-500/40 rounded-lg shadow-md overflow-hidden p-6">
+            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black rounded-lg shadow-md overflow-hidden p-6">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary/10 text-primary">
                 <FaEnvelopeOpen />
               </div>
@@ -110,7 +110,7 @@ const FeatureSectionComponent = () => {
             </div>
 
             {/* <!-- Feature 6 --> */}
-            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black dark:border dark:border-slate-500/40 rounded-lg shadow-md overflow-hidden p-6">
+            <div className="feature-card transition-all duration-300 ease-in-out dark:bg-black rounded-lg shadow-md overflow-hidden p-6">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary/10 text-primary">
                 <FaBell />
               </div>

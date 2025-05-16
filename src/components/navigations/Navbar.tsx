@@ -3,6 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router";
 import { Briefcase } from "lucide-react";
 import { FaAlignJustify } from "react-icons/fa6";
 import Sidebar from "./SidebarNavigation";
+import { ModeToggle } from "../toggles/ModeToggle";
 
 const NavbarComponent = () => {
   const { pathname } = useLocation();
@@ -89,6 +90,7 @@ const NavbarComponent = () => {
             <div className="flex items-center">
               {pathname === "/" ? (
                 <>
+                  <ModeToggle />
                   <FaAlignJustify
                     onClick={toggleSidebar}
                     className="p-2 text-4xl rounded-md cursor-pointer hover:bg-secondary/90 lg:hidden"

@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -177,7 +178,10 @@ const EditJobApplicationForm = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px] bg-primary-foreground rounded-xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto my-4">
+      <DialogContent
+        onInteractOutside={(e) => e.preventDefault()}
+        className="sm:max-w-[500px] bg-primary-foreground rounded-xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto my-4"
+      >
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-primary">
             Edit Application
@@ -321,7 +325,13 @@ const EditJobApplicationForm = ({
                 className="col-span-3"
               />
             </div>
+
             <DialogFooter>
+              <DialogClose asChild>
+                <Button type="button" variant="secondary">
+                  Cancel
+                </Button>
+              </DialogClose>
               <Button
                 type="submit"
                 disabled={mutation.isPending}
