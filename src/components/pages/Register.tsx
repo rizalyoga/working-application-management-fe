@@ -22,7 +22,7 @@ import {
   FaEnvelope,
   FaEye,
   FaLock,
-  FaPhone,
+  // FaPhone,
   FaRegEyeSlash,
   FaUser,
 } from "react-icons/fa6";
@@ -31,11 +31,19 @@ import { APIResponse } from "@/types/API-types";
 import { formRegisterSchema } from "@/lib/form-validator/auth-form-validator";
 import AuthLayout from "../layout/AuthLayout";
 import { setCookie } from "@/lib/cookies/cookies";
+import useProfileUserStore from "@/stores/useProfileStore";
 
 const RegisterComponent = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+  const {
+    updateName,
+    updateEmail,
+    updatePhoneNumber,
+    updateProfilePictureUrl,
+    updateResumeUrl,
+  } = useProfileUserStore();
 
   // Initialize form with react-hook-form and zod
   type FormValues = z.infer<typeof formRegisterSchema>;
@@ -44,7 +52,7 @@ const RegisterComponent = () => {
     defaultValues: {
       name: "",
       email: "",
-      phone_number: "",
+      // phone_number: "",
       password: "",
       confirmPassword: "",
       terms: false,
@@ -73,6 +81,20 @@ const RegisterComponent = () => {
         description: data.message,
         position: "bottom-right",
       });
+      // Save response data to localstorage
+      localStorage.setItem("profile-storage", JSON.stringify(data));
+      // Save response data to global state
+      updateName(data.data?.user.name);
+      updateEmail(data.data?.user.email);
+      updatePhoneNumber(data.data?.user.phone_number);
+      updateProfilePictureUrl(
+        data.data?.user.profile_picture_url
+          ? data.data?.user.profile_picture_url
+          : ""
+      );
+      updateResumeUrl(
+        data.data?.user.resume_url ? data.data?.user.resume_url : ""
+      );
 
       setCookie("access_token", data.data?.tokens.access_token, 1);
       setCookie("refresh_token", data.data?.tokens.refresh_token, 7);
@@ -161,7 +183,7 @@ const RegisterComponent = () => {
                 />
 
                 {/* Phone Number Field */}
-                <FormField
+                {/* <FormField
                   control={form.control}
                   name="phone_number"
                   render={({ field }) => (
@@ -181,7 +203,7 @@ const RegisterComponent = () => {
                       <FormMessage />
                     </FormItem>
                   )}
-                />
+                />*/}
 
                 {/* Password Field */}
                 <FormField

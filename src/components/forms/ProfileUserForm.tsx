@@ -30,7 +30,7 @@ const ProfileUserForm = () => {
     defaultValues: {
       name: "",
       email: "",
-      phone_number: "",
+      // phone_number: "",
     },
   });
 
@@ -40,7 +40,7 @@ const ProfileUserForm = () => {
     if (userStore.email) {
       setValue("name", userStore?.name || "");
       setValue("email", userStore?.email || "");
-      setValue("phone_number", userStore?.phone_number || "");
+      // setValue("phone_number", userStore?.phone_number || "");
     }
   }, [setValue]);
 
@@ -130,7 +130,7 @@ const ProfileUserForm = () => {
         />
 
         {/* Phone Number Field */}
-        <FormField
+        {/* <FormField
           control={control}
           name="phone_number"
           render={() => (
@@ -147,7 +147,7 @@ const ProfileUserForm = () => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
 
         <Button
           type="submit"
