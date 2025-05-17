@@ -104,7 +104,7 @@ const JobApplicationTable = ({
               to={row.getValue("job_url")}
               className="truncate text-center text-blue-600 hover:text-blue-400"
             >
-              "See job vancancies"
+              See job vancancies
             </Link>
           ) : (
             "-"
