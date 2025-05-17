@@ -48,8 +48,6 @@ import DetailApplicationModal from "../modals/DetailApplicationModal";
 import EditJobApplicationForm from "../forms/EditApplicationForm";
 import { Link } from "react-router";
 
-// ... (Tipe dan impor lainnya tetap sama)
-
 // Komponen utama
 const JobApplicationTable = ({
   data,
@@ -100,13 +98,17 @@ const JobApplicationTable = ({
       header: "Job Link",
       cell: ({ row }) => (
         <div className="overflow-hidden text-center">
-          <Link
-            target="_blank"
-            to={row.getValue("job_url")}
-            className="truncate text-center text-blue-600 hover:text-blue-400"
-          >
-            {row.getValue("job_url") ? "See job vancancies" : ""}
-          </Link>
+          {row.getValue("job_url") ? (
+            <Link
+              target="_blank"
+              to={row.getValue("job_url")}
+              className="truncate text-center text-blue-600 hover:text-blue-400"
+            >
+              "See job vancancies"
+            </Link>
+          ) : (
+            "-"
+          )}
         </div>
       ),
     },
