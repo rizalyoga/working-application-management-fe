@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist, PersistOptions } from "zustand/middleware";
 
 interface UserProfileInterface {
+  userID: string;
   name: string;
   email: string;
   phone_number: string;
@@ -11,6 +12,7 @@ interface UserProfileInterface {
 }
 
 type Action = {
+  updateID: (id: UserProfileInterface["userID"]) => void;
   updateName: (name: UserProfileInterface["name"]) => void;
   updateEmail: (email: UserProfileInterface["email"]) => void;
   updatePhoneNumber: (
@@ -32,6 +34,7 @@ type PersistProfileStore = PersistOptions<ProfileStore>;
 const useProfileUserStore = create<ProfileStore>()(
   persist(
     (set) => ({
+      userID: "",
       name: "",
       email: "",
       phone_number: "",
@@ -40,6 +43,7 @@ const useProfileUserStore = create<ProfileStore>()(
       is_loading: false,
 
       // Action
+      updateID: (userID) => set(() => ({ userID })),
       updateName: (name) => set(() => ({ name })),
       updateEmail: (email) => set(() => ({ email })),
       updatePhoneNumber: (phone_number) => set(() => ({ phone_number })),

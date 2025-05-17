@@ -3,7 +3,6 @@ import { APIResponse } from "@/types/API-types";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router";
 import { removeCookie } from "@/lib/cookies/cookies";
-
 import { Briefcase } from "lucide-react";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";

@@ -7,11 +7,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ApiResponseForJobApplications } from "@/types/API-types";
 import JobApplicationTable from "@/components/tables/JobApplicationTable";
 import JobApplicationTableSkeleton from "@/components/skeletons/JobApplicationTableSkeleton";
+import useProfileUserStore from "@/stores/useProfileStore";
 
 const DashboardIndex = () => {
   const BASE_URL = useMemo(() => process.env.REACT_APP_API_BASE_URL, []);
+  const userProfileStore = useProfileUserStore();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { userID } = userProfileStore;
 
   // Mengambil status_id dari URL jika ada
   const queryParams = new URLSearchParams(location.search);
@@ -54,7 +58,7 @@ const DashboardIndex = () => {
 
   // Query data dengan TanStack Query
   const { data, isLoading, error } = useQuery<ApiResponseForJobApplications>({
-    queryKey: ["jobApplications", statusFilter], // Tambahkan statusFilter ke queryKey untuk caching per filter
+    queryKey: ["jobApplications", statusFilter, userID], // Tambahkan statusFilter ke queryKey untuk caching per filter
     queryFn: () => fetchAPI<ApiResponseForJobApplications>(apiUrl, "GET", true),
     retry: 2,
     staleTime: 10 * 60 * 1000, // Data dianggap fresh selama 10 menit

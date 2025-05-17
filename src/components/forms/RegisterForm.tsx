@@ -75,7 +75,7 @@ const RegisterForm = () => {
     mutationFn: registerUser,
     onSuccess: (data) => {
       form.reset();
-      toast("Account was successfully created!", {
+      toast("Account was successfully created! 🥰", {
         description: data.message,
         position: "bottom-right",
       });

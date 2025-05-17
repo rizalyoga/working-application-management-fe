@@ -29,6 +29,7 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const {
+    updateID,
     updateName,
     updateEmail,
     updatePhoneNumber,
@@ -71,7 +72,9 @@ const LoginForm = () => {
       });
       // Save response data to localstorage
       localStorage.setItem("profile-storage", JSON.stringify(data));
+
       // Save response data to global state
+      updateID(data.data?.user.id);
       updateName(data.data?.user.name);
       updateEmail(data.data?.user.email);
       updatePhoneNumber(data.data?.user.phone_number);
