@@ -18,6 +18,7 @@ import { APIResponse } from "@/types/API-types";
 import { fetchAPI } from "@/lib/API/auth";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { Save } from "lucide-react";
 
 const EditPasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -198,6 +199,7 @@ const EditPasswordForm = () => {
           className="w-full cursor-pointer"
           disabled={mutation.isPending}
         >
+          <Save className="h-3.5 w-3.5 mr-1" />
           {mutation.isPending ? "Saving..." : "Save"}
         </Button>
 

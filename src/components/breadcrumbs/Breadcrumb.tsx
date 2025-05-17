@@ -7,6 +7,7 @@ import {
   BreadcrumbSeparator,
 } from "../ui/breadcrumb";
 import { useLocation, Link } from "react-router";
+import { House } from "lucide-react";
 
 const BreadcrumbComponent = () => {
   const location = useLocation();
@@ -28,10 +29,12 @@ const BreadcrumbComponent = () => {
               <Link
                 to="/dashboard"
                 className={
-                  pathnames.length == 1 ? "font-semibold text-black" : ""
+                  pathnames.length == 1
+                    ? "flex items-center gap-2 font-semibold text-black dark:text-primary"
+                    : "flex items-center gap-2 "
                 }
               >
-                🏠 {pathToLabelMap["dashboard"]}
+                <House size={18} /> {pathToLabelMap["dashboard"]}
               </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
@@ -48,7 +51,7 @@ const BreadcrumbComponent = () => {
                       to={to}
                       className={
                         isLast
-                          ? "font-semibold text-primary ml-2"
+                          ? "font-semibold text-primary ml-2 dark:text-primary"
                           : "text-muted-foreground"
                       }
                     >

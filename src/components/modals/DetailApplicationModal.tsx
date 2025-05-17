@@ -8,10 +8,19 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Building2,
+  CalendarDays,
+  ExternalLink,
+  HardHat,
+  Info,
+  NotepadText,
+  Proportions,
+} from "lucide-react";
 import { fetchAPI } from "@/lib/API/auth";
 import { toast } from "sonner";
 import { ApiResponseForJobApplicationByID } from "@/types/API-types";
-import { formatDate } from "@/lib/utils";
+import { capitalizeFirstChar, formatDate } from "@/lib/utils";
 import { getStatusVariant } from "@/lib/helper-table";
 import DetailModalSkeleton from "../skeletons/DetailModalSkeleton";
 import { Link } from "react-router";
@@ -62,8 +71,11 @@ const DetailApplicationModal = ({
                 <table className="w-full text-left text-gray-600">
                   <tbody>
                     <tr className="border-b border-gray-200">
-                      <th className="py-2 pr-4 font-semibold text-primary w-1/3">
-                        Date
+                      <th className="py-2 pr-4 font-semibold text-primary w-1/3 ">
+                        <span className="flex justify-start items-center gap-2">
+                          <CalendarDays size={20} />
+                          Date
+                        </span>
                       </th>
                       <td className="py-2 text-primary">
                         {formatDate(data?.data.application_date as string)}
@@ -71,7 +83,10 @@ const DetailApplicationModal = ({
                     </tr>
                     <tr className="border-b border-gray-200">
                       <th className="py-2 pr-4 font-semibold text-primary w-1/3">
-                        Company
+                        <span className="flex justify-start items-center gap-2">
+                          <Building2 size={20} />
+                          Company
+                        </span>
                       </th>
                       <td className="py-2 text-primary">
                         {data?.data.company_name}
@@ -79,7 +94,10 @@ const DetailApplicationModal = ({
                     </tr>
                     <tr className="border-b border-gray-200">
                       <th className="py-2 pr-4 font-semibold text-primary w-1/3">
-                        Position
+                        <span className="flex justify-start items-center gap-2">
+                          <HardHat size={20} />
+                          Position
+                        </span>
                       </th>
                       <td className="py-2 text-primary">
                         {data?.data.job_position}
@@ -87,7 +105,10 @@ const DetailApplicationModal = ({
                     </tr>
                     <tr className="border-b border-gray-200">
                       <th className="py-2 pr-4 font-semibold text-primary w-1/3">
-                        Portal
+                        <span className="flex justify-start items-center gap-2">
+                          <Proportions size={20} />
+                          Job Portal
+                        </span>
                       </th>
                       <td className="py-2 text-primary">
                         {data?.data.job_portal}
@@ -95,29 +116,39 @@ const DetailApplicationModal = ({
                     </tr>
                     <tr className="border-b border-gray-200">
                       <th className="py-2 pr-4 font-semibold text-primary w-1/3">
-                        Job URL
+                        <span className="flex justify-start items-center gap-2">
+                          <ExternalLink size={20} />
+                          Job URL
+                        </span>
                       </th>
-                      <td className="py-2 text-blue-700 hover:text-blue-500 overflow-hidden">
-                        <Link
-                          to={data?.data.job_url as string}
-                          target="_blank"
-                          className="truncate"
-                        >
-                          {data?.data.job_url ? "See job vacancies" : "-"}
-                        </Link>
+                      <td className="py-2 overflow-hidden">
+                        {data?.data.job_url ? (
+                          <Link
+                            to={data?.data.job_url as string}
+                            target="_blank"
+                            className="truncate text-blue-500 hover:text-blue-600 "
+                          >
+                            {data?.data.job_url ? "See job vacancies" : "-"}
+                          </Link>
+                        ) : (
+                          "-"
+                        )}
                       </td>
                     </tr>
                     <tr className="border-b border-gray-200">
                       <th className="py-2 pr-4 font-semibold text-primary w-1/3">
-                        Status
+                        <span className="flex justify-start items-center gap-2">
+                          <Info size={20} />
+                          Status
+                        </span>
                       </th>
                       <td className="py-2">
                         <span
-                          className={`inline-block px-2 py-1 rounded-full text-sm text-white ${getStatusVariant(
+                          className={`inline-block px-2 py-1 rounded-sm text-sm font-semibold text-primary-foreground ${getStatusVariant(
                             data?.data.status as string
                           )}`}
                         >
-                          {data?.data.status}
+                          {capitalizeFirstChar(data?.data.status as string)}
                         </span>
                       </td>
                     </tr>
@@ -125,8 +156,10 @@ const DetailApplicationModal = ({
                 </table>
                 {data?.data.notes && (
                   <div className="mt-4">
-                    <span className="font-semibold text-primary">Notes:</span>
-                    <p className="mt-2 text-primary bg-secondary p-3 rounded-lg">
+                    <span className="font-semibold text-primary flex justify-start items-center gap-2">
+                      <NotepadText size={20} /> Notes:
+                    </span>
+                    <p className="mt-4 text-primary bg-secondary p-3 rounded-lg border">
                       {data.data.notes}
                     </p>
                   </div>

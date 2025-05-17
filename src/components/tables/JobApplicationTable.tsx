@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreVerticalIcon } from "lucide-react";
+import { ExternalLink, MoreVerticalIcon } from "lucide-react";
 import {
   ColumnDef,
   flexRender,
@@ -102,9 +102,9 @@ const JobApplicationTable = ({
             <Link
               target="_blank"
               to={row.getValue("job_url")}
-              className="truncate text-center text-blue-600 hover:text-blue-400"
+              className="text-blue-600 hover:text-blue-400"
             >
-              See job vancancies
+              <ExternalLink className="mx-auto" size={20} />
             </Link>
           ) : (
             "-"
@@ -117,7 +117,9 @@ const JobApplicationTable = ({
       header: "Status",
       cell: ({ row }) => (
         <div className="text-center">
-          <Badge className={getStatusVariant(row.getValue("status"))}>
+          <Badge
+            className={`rounded-sm ${getStatusVariant(row.getValue("status"))}`}
+          >
             {capitalizeFirstChar(row.getValue("status"))}
           </Badge>
         </div>
