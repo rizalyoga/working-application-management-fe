@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { formatDate } from "@/lib/utils";
+import { capitalizeFirstChar, formatDate } from "@/lib/utils";
 import {
   JobApplication,
   JobApplicationTableProps,
@@ -46,6 +46,7 @@ import JobApplicationForm from "../forms/AppllicationForm";
 import DeleteModal from "../modals/DeleteModal";
 import DetailApplicationModal from "../modals/DetailApplicationModal";
 import EditJobApplicationForm from "../forms/EditApplicationForm";
+import { Link } from "react-router";
 
 // ... (Tipe dan impor lainnya tetap sama)
 
@@ -95,12 +96,27 @@ const JobApplicationTable = ({
       ),
     },
     {
+      accessorKey: "job_url",
+      header: "Job Link",
+      cell: ({ row }) => (
+        <div className="overflow-hidden text-center">
+          <Link
+            target="_blank"
+            to={row.getValue("job_url")}
+            className="truncate text-center text-blue-600 hover:text-blue-400"
+          >
+            {row.getValue("job_url") ? "See job vancancies" : ""}
+          </Link>
+        </div>
+      ),
+    },
+    {
       accessorKey: "status",
       header: "Status",
       cell: ({ row }) => (
         <div className="text-center">
           <Badge className={getStatusVariant(row.getValue("status"))}>
-            {row.getValue("status")}
+            {capitalizeFirstChar(row.getValue("status"))}
           </Badge>
         </div>
       ),
@@ -109,7 +125,9 @@ const JobApplicationTable = ({
       accessorKey: "notes",
       header: "Notes",
       cell: ({ row }) => (
-        <div className="text-center">{row.getValue("notes")}</div>
+        <div className="w-[100px] text-center overflow-hidden truncate">
+          {row.getValue("notes")}
+        </div>
       ),
     },
     {

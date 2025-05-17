@@ -58,6 +58,7 @@ const JobApplicationForm = () => {
       company_name: "",
       job_position: "",
       job_portal: "",
+      job_url: "",
       notes: "",
     },
   });
@@ -132,7 +133,7 @@ const JobApplicationForm = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
           <div className="flex flex-col justify-around items-start gap-4">
             <Label htmlFor="company_name" className="text-right">
-              Company Name
+              Company Name*
             </Label>
             <Input
               id="company_name"
@@ -148,7 +149,7 @@ const JobApplicationForm = () => {
           </div>
           <div className="flex flex-col justify-around items-start gap-4">
             <Label htmlFor="job_position" className="text-right">
-              Job Position
+              Job Position*
             </Label>
             <Input
               id="job_position"
@@ -164,7 +165,7 @@ const JobApplicationForm = () => {
           </div>
           <div className="flex flex-col justify-around items-start gap-4">
             <Label htmlFor="job_portal" className="text-right">
-              Job portal
+              Job portal*
             </Label>
             <Input
               id="job_portal"
@@ -179,8 +180,22 @@ const JobApplicationForm = () => {
             )}
           </div>
           <div className="flex flex-col justify-around items-start gap-4">
+            <Label htmlFor="job_url" className="text-right">
+              Job url
+            </Label>
+            <Input
+              id="job_url"
+              placeholder="https://job_vacancies.com"
+              {...register("job_url")}
+              className="col-span-3"
+            />
+            {errors.job_url && (
+              <p className="text-red-500 text-sm">{errors.job_url.message}</p>
+            )}
+          </div>
+          <div className="flex flex-col justify-around items-start gap-4">
             <Label htmlFor="application_date" className="text-right">
-              Application date
+              Application date*
             </Label>
             <Popover>
               <PopoverTrigger asChild>
@@ -219,7 +234,7 @@ const JobApplicationForm = () => {
           </div>
           <div className="flex flex-col justify-around items-start gap-4">
             <Label htmlFor="status_id" className="text-right">
-              Application status
+              Application status*
             </Label>
             <Select
               onValueChange={(value) => setValue("status_id", value)}

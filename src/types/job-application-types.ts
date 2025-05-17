@@ -4,6 +4,7 @@ export interface JobApplication {
   application_date: string;
   job_position: string;
   job_portal: string;
+  job_url: string;
   company_name: string;
   status: string;
   status_id: number;

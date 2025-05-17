@@ -17,10 +17,12 @@ export const getStatusVariant = (status: string) => {
       return "bg-orange-400";
     case "interview c level ii":
       return "bg-orange-500";
+    case "interview ceo":
+      return "bg-emerald-500";
     case "reject":
       return "bg-red-400";
     case "success":
-      return "bg-emerald-500";
+      return "bg-emerald-700";
     default:
       return "outline";
   }
@@ -36,6 +38,7 @@ export const STATUS_OPTIONS = [
   { "Interview User II": 8 },
   { "Interview C level": 9 },
   { "Interview C level II": 10 },
+  { "Interview CEO": 11 },
   { Reject: 5 },
   { Hired: 6 },
 ];

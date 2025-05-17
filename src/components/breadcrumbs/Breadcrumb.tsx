@@ -1,3 +1,4 @@
+import { capitalizeFirstChar } from "@/lib/utils";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -16,10 +17,6 @@ const BreadcrumbComponent = () => {
     profile: "Profile",
     resume: "Resume",
     // tambahkan label lainnya jika perlu
-  };
-
-  const capitalizeFirstChar = (str: string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   return (

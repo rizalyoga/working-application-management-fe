@@ -14,6 +14,7 @@ import { ApiResponseForJobApplicationByID } from "@/types/API-types";
 import { formatDate } from "@/lib/utils";
 import { getStatusVariant } from "@/lib/helper-table";
 import DetailModalSkeleton from "../skeletons/DetailModalSkeleton";
+import { Link } from "react-router";
 
 interface DetailApplicationModalProps {
   jobApplicationId: string;
@@ -90,6 +91,20 @@ const DetailApplicationModal = ({
                       </th>
                       <td className="py-2 text-primary">
                         {data?.data.job_portal}
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <th className="py-2 pr-4 font-semibold text-primary w-1/3">
+                        Job URL
+                      </th>
+                      <td className="py-2 text-blue-700 hover:text-blue-500 overflow-hidden">
+                        <Link
+                          to={data?.data.job_url as string}
+                          target="_blank"
+                          className="truncate"
+                        >
+                          {data?.data.job_url ? "See job vacancies" : "-"}
+                        </Link>
                       </td>
                     </tr>
                     <tr className="border-b border-gray-200">
