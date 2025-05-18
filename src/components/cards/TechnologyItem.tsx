@@ -13,7 +13,7 @@ const TechItem = ({ name, description, icon, className }: TechItemProps) => {
   return (
     <Card
       className={clsx(
-        "border border-border/50 bg-background/50 dark:bg-black backdrop-blur-sm",
+        "border border-border/50 bg-white dark:bg-black backdrop-blur-sm",
         className
       )}
     >

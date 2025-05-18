@@ -73,7 +73,9 @@ const NavbarDashboard = () => {
                     <Link to={"/dashboard/profile"}>
                       <DropdownMenuItem>Profile</DropdownMenuItem>
                     </Link>
-                    <DropdownMenuItem>Resume</DropdownMenuItem>
+                    <Link to={"/dashboard/resume"}>
+                      <DropdownMenuItem>Resume</DropdownMenuItem>
+                    </Link>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
