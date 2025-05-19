@@ -9,6 +9,7 @@ import { ThemeProvider } from "./components/layout/ThemeProvider";
 import ProfilePage from "./components/pages/Dashboard/ProfilePage";
 import ResumePage from "./components/pages/Dashboard/ResumePage";
 import ForgotPassword from "./components/pages/ForgotPassword";
+import ResetPassword from "./components/pages/ResetPassword";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="register" element={<RegisterView />} />
           <Route path="login" element={<LoginView />} />
           <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="reset-password" element={<ResetPassword />} />
           <Route path="dashboard" element={<PrivateRoute />}>
             <Route index element={<DashboardIndexView />} />
             <Route path="profile" element={<ProfilePage />} />

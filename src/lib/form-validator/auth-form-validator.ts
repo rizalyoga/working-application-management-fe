@@ -62,3 +62,18 @@ export const formUpdatePasswordSchema = z
 export const formForgotPasswordSchema = z.object({
   email: z.string().email("Invalid email address"),
 });
+
+export const formResetPasswordSchema = z
+  .object({
+    token: z.string(),
+    new_password: z
+      .string()
+      .min(8, "New password must be at least 8 characters"),
+    confirm_new_password: z
+      .string()
+      .min(8, "New password must be at least 8 characters"),
+  })
+  .refine((data) => data.new_password === data.confirm_new_password, {
+    message: "Passwords do not match",
+    path: ["confirm_new_password"],
+  });
