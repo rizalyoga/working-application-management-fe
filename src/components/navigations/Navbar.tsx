@@ -96,7 +96,7 @@ const NavbarComponent = () => {
                     className="p-2 text-4xl rounded-md cursor-pointer hover:bg-secondary/90 lg:hidden"
                   />
 
-                  <span className="hidden lg:flex">
+                  <span className="hidden lg:flex ml-1">
                     <NavLink
                       to="/login"
                       className="text-dark hover:text-primary p-3 text-sm font-medium rounded-md hover:bg-secondary/90"
