@@ -88,7 +88,7 @@ const NavbarComponent = () => {
             )}
 
             <div className="flex items-center">
-              {pathname === "/" ? (
+              {pathname === "/" || pathname === "/forgot-password" ? (
                 <>
                   <ModeToggle />
                   <FaAlignJustify

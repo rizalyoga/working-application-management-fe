@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation } from "@tanstack/react-query";
 
-import { FaEye, FaLock, FaRegEyeSlash, FaUser } from "react-icons/fa6";
+import { FaEye, FaLock, FaRegEyeSlash, FaEnvelope } from "react-icons/fa6";
 import {
   Form,
   FormControl,
@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { fetchAPI } from "@/lib/API/auth";
 import { APIResponse } from "@/types/API-types";
@@ -125,7 +125,7 @@ const LoginForm = () => {
               <FormLabel>Email </FormLabel>
               <FormControl>
                 <div className="relative">
-                  <FaUser className="text-gray-400 absolute mt-2.5 mx-3" />
+                  <FaEnvelope className="text-gray-400 absolute mt-2.5 mx-3" />
                   <Input
                     placeholder="john@mail.com"
                     {...field}
@@ -144,7 +144,15 @@ const LoginForm = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <span className="flex justify-between items-center">
+                <FormLabel>Password</FormLabel>
+                <Link
+                  className="text-sm hover:underline"
+                  to={"/forgot-password"}
+                >
+                  Forgot password
+                </Link>
+              </span>
               <FormControl>
                 <div className="relative">
                   <FaLock className="absolute mt-2.5 mx-3 text-gray-400" />

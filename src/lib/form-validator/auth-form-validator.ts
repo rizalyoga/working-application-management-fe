@@ -58,3 +58,7 @@ export const formUpdatePasswordSchema = z
     message: "Passwords do not match",
     path: ["confirm_new_password"],
   });
+
+export const formForgotPasswordSchema = z.object({
+  email: z.string().email("Invalid email address"),
+});

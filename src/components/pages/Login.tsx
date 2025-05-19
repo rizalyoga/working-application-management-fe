@@ -7,7 +7,7 @@ import LoginForm from "../forms/LoginForm";
 const LoginComponent = () => {
   return (
     <AuthLayout>
-      <div className="min-h-screen flex items-center justify-center flex-col py-12 sm:px-6 lg:px-8 mt-8">
+      <div className="min-h-screen flex items-center justify-center flex-col py-12 sm:px-6 lg:px-8 mt-8 md:mt-0">
         <div className="flex flex-col justify-center items-center mb-8">
           <FaBriefcase className="text-primary text-5xl mb-4 text-center" />
           <h2 className="text-3xl font-extrabold text-primary">Welcome Back</h2>
