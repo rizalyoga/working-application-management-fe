@@ -1,5 +1,7 @@
 export interface PdfFile extends File {
   preview: string;
+  relativePath?: string;
+  path?: string;
 }
 
 export interface PdfUploadProps {

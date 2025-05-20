@@ -21,6 +21,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import useProfileUserStore from "@/stores/useProfileStore";
 
 export const PdfUpload: React.FC<PdfUploadProps> = ({
   pdfUrl,
@@ -32,6 +33,8 @@ export const PdfUpload: React.FC<PdfUploadProps> = ({
   error = null,
 }) => {
   const [isModified, setIsModified] = useState(false);
+  const profileUserStore = useProfileUserStore();
+  const { resume_url } = profileUserStore;
 
   // Handle the file drop
   const onDrop = useCallback(
@@ -145,7 +148,7 @@ export const PdfUpload: React.FC<PdfUploadProps> = ({
           className="flex items-center gap-1 text-primary hover:text-primary"
         >
           <Save className="h-3.5 w-3.5 mr-1" />
-          <span>Save</span>
+          <span>{isLoading ? "Save..." : "Save"}</span>
         </Button>
 
         <AlertDialog>
@@ -153,7 +156,7 @@ export const PdfUpload: React.FC<PdfUploadProps> = ({
             <Button
               variant="outline"
               size="sm"
-              disabled={!pdfUrl || isLoading || isDeleting}
+              disabled={!resume_url || isLoading || isDeleting}
               className="flex items-center gap-1 text-destructive hover:text-destructive"
             >
               <Trash2 className="h-3.5 w-3.5 mr-1" />
@@ -174,7 +177,7 @@ export const PdfUpload: React.FC<PdfUploadProps> = ({
                 onClick={handleDeleteClick}
                 className="bg-destructive text-white hover:bg-destructive/90"
               >
-                Delete
+                {isLoading ? "Deleting..." : "Delete"}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
