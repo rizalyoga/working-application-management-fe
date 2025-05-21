@@ -212,7 +212,7 @@ const JobApplicationForm = () => {
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent className="w-auto p-0 flex" align="center">
                 <Calendar
                   className="z-50 pointer-events-auto "
                   mode="single"
@@ -222,7 +222,6 @@ const JobApplicationForm = () => {
                   disabled={(date) =>
                     date > new Date() || date < new Date("1900-01-01")
                   }
-                  initialFocus
                 />
               </PopoverContent>
             </Popover>
