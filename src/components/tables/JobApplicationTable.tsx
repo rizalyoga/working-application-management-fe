@@ -22,7 +22,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, MoreVerticalIcon } from "lucide-react";
+import {
+  ArrowDownIcon,
+  ArrowUpDownIcon,
+  ArrowUpIcon,
+  ExternalLink,
+  MoreVerticalIcon,
+} from "lucide-react";
 import {
   ColumnDef,
   flexRender,
@@ -30,6 +36,8 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
+  SortingState,
+  getSortedRowModel, // Tambahkan ini
 } from "@tanstack/react-table";
 import { Input } from "@/components/ui/input";
 import {
@@ -60,6 +68,9 @@ const JobApplicationTable = ({
   const [detailApplicationModalOpen, setdetailApplicationModalOpen] =
     useState(false);
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: "application_date", desc: true }, // Default: terbaru pertama
+  ]);
 
   const columns: ColumnDef<JobApplication>[] = [
     {
@@ -70,20 +81,47 @@ const JobApplicationTable = ({
     },
     {
       accessorKey: "application_date",
-      header: "Application Date",
+      header: ({ column }) => (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="mx-auto"
+        >
+          Application Date
+          {column.getIsSorted() === "asc" ? (
+            <ArrowUpIcon className="ml-2 h-4 w-4" />
+          ) : column.getIsSorted() === "desc" ? (
+            <ArrowDownIcon className="ml-2 h-4 w-4" />
+          ) : (
+            <ArrowUpDownIcon className="ml-2 h-4 w-4" />
+          )}
+        </Button>
+      ),
       cell: ({ row }) => (
         <div className="text-center">
           {formatDate(row.getValue("application_date"))}
         </div>
       ),
+      enableSorting: true,
+      sortingFn: "datetime",
     },
     {
       accessorKey: "job_position",
       header: "Job Position",
+      cell: ({ row }) => (
+        <div className="w-[150px] text-wrap">
+          {row.getValue("job_position")}
+        </div>
+      ),
     },
     {
       accessorKey: "company_name",
       header: "Company",
+      cell: ({ row }) => (
+        <div className="w-[150px] text-center text-wrap">
+          {row.getValue("company_name")}
+        </div>
+      ),
     },
     {
       accessorKey: "job_portal",
@@ -193,11 +231,14 @@ const JobApplicationTable = ({
     getPaginationRowModel: getPaginationRowModel(),
     state: {
       globalFilter,
+      sorting,
     },
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(), // Tambahkan ini
     onGlobalFilterChange: setGlobalFilter,
     initialState: {
       pagination: {
-        pageSize: 10,
+        pageSize: 15,
       },
     },
   });
