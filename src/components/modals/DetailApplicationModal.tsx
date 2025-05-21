@@ -16,11 +16,16 @@ import {
   Info,
   NotepadText,
   Proportions,
+  SquareStack,
 } from "lucide-react";
 import { fetchAPI } from "@/lib/API/auth";
 import { toast } from "sonner";
 import { ApiResponseForJobApplicationByID } from "@/types/API-types";
-import { capitalizeFirstChar, formatDate } from "@/lib/utils";
+import {
+  capitalizeFirstChar,
+  formatDate,
+  formatDateWithTime,
+} from "@/lib/utils";
 import { getStatusVariant } from "@/lib/helper-table";
 import DetailModalSkeleton from "../skeletons/DetailModalSkeleton";
 import { Link } from "react-router";
@@ -58,7 +63,7 @@ const DetailApplicationModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px] rounded-xl shadow-2xl p-6 transition-all duration-300 ease-in-out transform">
+      <DialogContent className="sm:max-w-[500px] rounded-xl shadow-2xl p-6 transition-all overflow-y-auto duration-300 ease-in-out transform bg-primary-foreground max-h-[90vh] my-4">
         <DialogHeader className="mb-4">
           <DialogTitle className="text-xl font-bold text-primary">
             {data?.data.job_position || "Job Application Details"}
@@ -159,9 +164,39 @@ const DetailApplicationModal = ({
                     <span className="font-semibold text-primary flex justify-start items-center gap-2">
                       <NotepadText size={20} /> Notes:
                     </span>
-                    <p className="mt-4 text-primary bg-secondary p-3 rounded-lg border">
+                    <div className="mt-4 text-primary bg-secondary p-3 rounded-lg border">
                       {data.data.notes}
-                    </p>
+                    </div>
+                  </div>
+                )}
+                {data?.data.status_history.length !== 0 && (
+                  <div className="mt-6">
+                    <h3 className="font-semibold text-primary flex justify-start items-center gap-2 mb-5">
+                      <SquareStack size={20} />
+                      Status History
+                    </h3>
+                    <div className="space-y-4">
+                      {data?.data.status_history.map((history) => (
+                        <div
+                          key={history.changed_at}
+                          className="relative pl-6 pr-4 py-3 bg-white dark:bg-black border-l-4 border-primary/20 rounded-r-lg shadow-sm hover:shadow-md transition-all duration-300 ease-in-out transform hover:-translate-y-1"
+                        >
+                          {/* Timeline dot */}
+                          <div className="absolute left-[-8px] top-1/2 transform -translate-y-1/2 w-4 h-4 bg-primary rounded-full border-2 border-white"></div>
+                          <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600">
+                            <span className="font-medium text-primary">
+                              {formatDateWithTime(history.changed_at)}
+                            </span>
+
+                            <span
+                              className={`inline-block px-2 py-1 rounded-sm text-xs font-semibold text-primary-foreground bg-primary mt-2 md:mt-0 md:text-sm`}
+                            >
+                              {capitalizeFirstChar(history.status)}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </>

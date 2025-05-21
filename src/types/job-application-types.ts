@@ -1,3 +1,9 @@
+interface StatusHistory {
+  changed_at: string;
+  status_id: number;
+  status: string;
+}
+
 // Interface untuk tipe data dari API
 export interface JobApplication {
   id: string;
@@ -9,6 +15,7 @@ export interface JobApplication {
   status: string;
   status_id: number;
   notes: string;
+  status_history: StatusHistory[];
   created_at: string;
   updated_at: string;
 }
