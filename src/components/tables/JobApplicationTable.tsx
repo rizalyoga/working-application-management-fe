@@ -22,13 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
-import {
-  ArrowDownIcon,
-  ArrowUpDownIcon,
-  ArrowUpIcon,
-  ExternalLink,
-  MoreVerticalIcon,
-} from "lucide-react";
+import { ArrowUpDownIcon, ExternalLink, MoreVerticalIcon } from "lucide-react";
 import {
   ColumnDef,
   flexRender,
@@ -87,14 +81,8 @@ const JobApplicationTable = ({
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="mx-auto"
         >
+          <ArrowUpDownIcon className="ml-2 text-gray-500" size={5} />
           Application Date
-          {column.getIsSorted() === "asc" ? (
-            <ArrowUpIcon className="ml-2 h-4 w-4" />
-          ) : column.getIsSorted() === "desc" ? (
-            <ArrowDownIcon className="ml-2 h-4 w-4" />
-          ) : (
-            <ArrowUpDownIcon className="ml-2 h-4 w-4" />
-          )}
         </Button>
       ),
       cell: ({ row }) => (
