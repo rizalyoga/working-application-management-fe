@@ -1,4 +1,12 @@
-import { Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  LabelList,
+  XAxis,
+  YAxis,
+} from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -36,7 +44,7 @@ const DistributionApplicationChart = ({ data }: RecruitmentBarChartProps) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-white p-4 shadow-lg border rounded-md">
+        <div className="bg-primary-foreground p-4 shadow-lg border rounded-md">
           <p className="font-medium">{data.name}</p>
           <p className="text-sm">
             <span className="font-medium">Count:</span> {data.value}
@@ -59,21 +67,23 @@ const DistributionApplicationChart = ({ data }: RecruitmentBarChartProps) => {
           type="category"
           dataKey="name"
           tickLine={false}
-          tickMargin={10}
+          tickMargin={8}
           axisLine={false}
           width={120}
         />
         <XAxis
           type="number"
           tickLine={false}
+          tick={false}
           tickMargin={10}
           axisLine={false}
-          tickFormatter={(value) => Math.round(value).toString()}
-          domain={[0, "dataMax + 1"]}
-          interval={0}
+          //   tickFormatter={(value) => Math.round(value).toString()}
+          //   domain={[0, "dataMax + 1"]}
+          //   interval={0}
         />
         <ChartTooltip content={<CustomTooltip />} />
         <Bar dataKey="value" radius={4}>
+          <LabelList dataKey="value" position="right" />
           {chartData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))}
