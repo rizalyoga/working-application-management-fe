@@ -11,7 +11,7 @@ export const getStatusVariant = (status: string) => {
       return "bg-sky-500";
     case "hr test":
       return "bg-sky-600";
-    case "psycological test":
+    case "psychological test":
       return "bg-sky-600";
     case "interview user":
       return "bg-purple-400";
@@ -66,7 +66,7 @@ export const STATUS_OPTIONS = [
   { "Reject CV": 16 },
   { "Reject interview HR": 17 },
   { "Reject interview user": 18 },
-  { "Reject HT test": 19 },
+  { "Reject HR test": 19 },
   { "Reject technical test": 20 },
   { "Closed vacancy": 21 },
   { Reject: 5 },
