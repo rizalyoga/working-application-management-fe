@@ -22,14 +22,14 @@ const DemoVideoSection = () => {
             Watch Our Quick Demo
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            See how JobTrack can transform your job search process in under 2
+            See how JobTrack can transform your job search process in under 3
             minutes.
           </p>
         </div>
 
         <div className="mt-10 aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-xl max-w-4xl mx-auto">
           <div className="bg-gray-200 w-full h-[400px] flex items-center justify-center">
-            <YouTube videoId="hGzVY88q8I0" opts={opts} />
+            <YouTube videoId="jgVBm7k1gks" opts={opts} />
           </div>
         </div>
       </div>
