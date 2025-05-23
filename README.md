@@ -9,7 +9,8 @@ A web application for efficiently managing and tracking job application processe
 - Upload and download resumes
 - Manage job applications (create, read, update, delete)
 - Track application statuses (apply, screening, interview, reject, success, etc.)
-- Filter and search applications based on status
+- Filter data based on status
+- Search applications based on job & company name
 - Add notes to each application
 - View analytics and statistics related to job applications
 - Password reset and change functionality
@@ -24,7 +25,7 @@ A web application for efficiently managing and tracking job application processe
 - React Hook Form
 - Zod (Form validation)
 
-# 🎥 Demo
+### 🎥 Demo
 
 [Demo Job Track](https://youtu.be/jgVBm7k1gks)
 
