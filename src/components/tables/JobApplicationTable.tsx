@@ -22,7 +22,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { ArrowUpDownIcon, ExternalLink, MoreVerticalIcon } from "lucide-react";
+import {
+  ArrowUpDownIcon,
+  ExternalLink,
+  MoreVerticalIcon,
+  Trash2Icon,
+} from "lucide-react";
 import {
   ColumnDef,
   flexRender,
@@ -49,6 +54,7 @@ import DeleteModal from "../modals/DeleteModal";
 import DetailApplicationModal from "../modals/DetailApplicationModal";
 import EditJobApplicationForm from "../forms/EditApplicationForm";
 import { Link } from "react-router";
+import DeleteAllModal from "../modals/DeleteAllModal";
 
 // Komponen utama
 const JobApplicationTable = ({
@@ -58,6 +64,7 @@ const JobApplicationTable = ({
 }: JobApplicationTableProps) => {
   const [globalFilter, setGlobalFilter] = useState("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteAllModalOpen, setDeleteAllModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [detailApplicationModalOpen, setdetailApplicationModalOpen] =
     useState(false);
@@ -263,6 +270,13 @@ const JobApplicationTable = ({
                   })}
                 </SelectContent>
               </Select>
+              <Button
+                variant={"destructive"}
+                onClick={() => setDeleteAllModalOpen(true)}
+                className="hover:bg-red-500"
+              >
+                <Trash2Icon />
+              </Button>
             </span>
           </div>
           <Table>
@@ -370,6 +384,14 @@ const JobApplicationTable = ({
           )}
         </CardContent>
       </Card>
+      {
+        <DeleteAllModal
+          isOpen={deleteAllModalOpen}
+          onClose={() => {
+            setDeleteAllModalOpen(false);
+          }}
+        />
+      }
       {selectedJobId && (
         <DeleteModal
           jobApplicationId={selectedJobId}
