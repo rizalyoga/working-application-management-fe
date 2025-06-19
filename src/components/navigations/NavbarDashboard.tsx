@@ -79,6 +79,9 @@ const NavbarDashboard = () => {
                     <Link to={"/dashboard/stats"}>
                       <DropdownMenuItem>Stats</DropdownMenuItem>
                     </Link>
+                    <Link to={"/dashboard/calendar"}>
+                      <DropdownMenuItem>Calendar</DropdownMenuItem>
+                    </Link>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem

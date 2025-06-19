@@ -16,6 +16,7 @@ import FormRegisterSkeleton from "./components/skeletons/FormRegisterSkeleton";
 import FormLoginSkeleton from "./components/skeletons/FormLoginSkeleton";
 import ForgotPasswordSkeleton from "./components/skeletons/FormForgotPaswordSkeleton";
 import FormResetPasswordSkeleton from "./components/skeletons/FormResetPasswordSkeleton";
+import CalendarPage from "./components/pages/Dashboard/Calendar";
 
 const RegisterView = lazy(() => import("./views/RegisterView"));
 const LoginView = lazy(() => import("./views/LoginView"));
@@ -66,6 +67,7 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
             <Route path="resume" element={<ResumePage />} />
             <Route path="stats" element={<StatsPage />} />
+            <Route path="calendar" element={<CalendarPage />} />
           </Route>
         </Routes>
       </ThemeProvider>
