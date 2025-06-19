@@ -16,6 +16,7 @@ import { EventDetailsModal } from "../modals/EventDetailModal";
 import { EventListModal } from "../modals/EventListModal";
 import { CalendarDay, ScheduleEvent } from "@/types/calendar";
 import { getMonthDays } from "@/lib/calendar";
+import CalendarSkeleton from "../skeletons/CalendarSkeleton";
 
 const MONTHS = [
   "January",
@@ -79,7 +80,7 @@ export const CalendarScheduler: React.FC = () => {
   };
 
   const handleDayClick = (day: CalendarDay) => {
-    console.log("Ini day type any line 81 in CalendarScheduler.tsx", day);
+    // console.log("Ini day type any line 81 in CalendarScheduler.tsx", day);
 
     setSelectedDate(day.fullDate);
     setEditEvent(null);
@@ -113,21 +114,6 @@ export const CalendarScheduler: React.FC = () => {
     setSelectedDate(event.date);
     setIsEventModalOpen(true);
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-[700px] boder border-slate-400 animate-pulse w-full">
-        <div className="grid grid-cols-7 grid-rows-6 gap-2 mb-2">
-          <div className="h-[100px] bg-slate-300 animate-pulse"></div>
-          <div className="h-[100px] bg-slate-300 animate-pulse"></div>
-          <div className="h-[100px] bg-slate-300 animate-pulse"></div>
-          <div className="h-[100px] bg-slate-300 animate-pulse"></div>
-          <div className="h-[100px] bg-slate-300 animate-pulse"></div>
-          <div className="h-[100px] bg-slate-300 animate-pulse"></div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="w-full mx-auto">
@@ -174,12 +160,14 @@ export const CalendarScheduler: React.FC = () => {
               ))}
             </div>
 
-            {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-1">
-              {monthDays.map((day, index) => (
-                <div
-                  key={`${day.fullDate}-${index}`}
-                  className={`
+            {isLoading ? (
+              <CalendarSkeleton />
+            ) : (
+              <div className="grid grid-cols-7 gap-1 ">
+                {monthDays.map((day, index) => (
+                  <div
+                    key={`${day.fullDate}-${index}`}
+                    className={`
                     relative min-h-24 p-2 border border-border hover:bg-accent cursor-pointer
                     ${
                       !day.isCurrentMonth
@@ -188,52 +176,56 @@ export const CalendarScheduler: React.FC = () => {
                     }
                     ${day.isToday ? "bg-primary/10 border-primary" : ""}
                   `}
-                  onClick={() => day.isCurrentMonth && handleDayClick(day)}
-                >
-                  <div className="text-sm font-medium mb-1">{day.date}</div>
+                    onClick={() => day.isCurrentMonth && handleDayClick(day)}
+                  >
+                    <div className="text-sm font-medium mb-1">{day.date}</div>
 
-                  {/* Events */}
-                  <div className="space-y-1">
-                    {day.events.slice(0, 2).map((event) => (
-                      <div
-                        key={event.id}
-                        className="text-xs p-1 bg-primary text-primary-foreground rounded truncate hover:bg-primary/80"
-                        onClick={(e) => handleEventClick(event, e)}
-                        title={`${event.time} - ${event.title}`}
-                      >
-                        {event.time} {event.title}
-                      </div>
-                    ))}
+                    {/* Events */}
+                    <div className="space-y-1">
+                      {day.events
+                        .sort((a, b) => a.time.localeCompare(b.time))
+                        .slice(0, 2)
+                        .map((event) => (
+                          <div
+                            key={event.id}
+                            className="text-xs p-1 bg-primary text-primary-foreground rounded truncate hover:bg-primary/80"
+                            onClick={(e) => handleEventClick(event, e)}
+                            title={`${event.title} - ${event.time}`}
+                          >
+                            {event.title} | {event.time}
+                          </div>
+                        ))}
 
-                    {day.events.length > 2 && (
-                      <div
-                        className="text-xs text-muted-foreground hover:text-primary cursor-pointer"
-                        onClick={(e) =>
-                          handleMoreEventsClick(day.events, day.fullDate, e)
-                        }
+                      {day.events.length > 2 && (
+                        <div
+                          className="text-xs text-muted-foreground hover:text-primary cursor-pointer"
+                          onClick={(e) =>
+                            handleMoreEventsClick(day.events, day.fullDate, e)
+                          }
+                        >
+                          +{day.events.length - 2} lainnya
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Add button for current month days */}
+                    {day.isCurrentMonth && (
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="absolute bottom-1 right-1 h-6 w-6 opacity-0 group-hover:opacity-100 hover:opacity-100"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDayClick(day);
+                        }}
                       >
-                        +{day.events.length - 2} lainnya
-                      </div>
+                        <Plus className="h-3 w-3" />
+                      </Button>
                     )}
                   </div>
-
-                  {/* Add button for current month days */}
-                  {day.isCurrentMonth && (
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="absolute bottom-1 right-1 h-6 w-6 opacity-0 group-hover:opacity-100 hover:opacity-100"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDayClick(day);
-                      }}
-                    >
-                      <Plus className="h-3 w-3" />
-                    </Button>
-                  )}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
           <ScrollBar orientation="horizontal" />
         </ScrollArea>

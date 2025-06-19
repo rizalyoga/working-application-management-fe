@@ -78,7 +78,7 @@ export const EventModal: React.FC<EventModalProps> = ({
           time: data.time,
         });
         toast("Success", {
-          description: "Jadwal berhasil diperbarui",
+          description: "Schedule has been updated",
         });
       } else {
         await createEventMutation.mutateAsync({
@@ -88,14 +88,14 @@ export const EventModal: React.FC<EventModalProps> = ({
           time: data.time,
         });
         toast("Success", {
-          description: "Jadwal berhasil dibuat",
+          description: "Event created successfully.",
         });
       }
       onClose();
     } catch (error) {
       console.error(error);
       toast("Error", {
-        description: "Terjadi kesalahan saat menyimpan jadwal",
+        description: "An error occurs when saving a schedule",
       });
     }
   };

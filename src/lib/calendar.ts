@@ -43,7 +43,7 @@ export const getMonthDays = (
     const fullDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(
       date
     ).padStart(2, "0")}`;
-    const dayEvents = events.filter((event) => event.date === fullDate);
+    const dayEvents = events?.filter((event) => event.date === fullDate);
 
     days.push({
       date,
@@ -64,7 +64,7 @@ export const getMonthDays = (
       2,
       "0"
     )}-${String(date).padStart(2, "0")}`;
-    const dayEvents = events.filter((event) => event.date === fullDate);
+    const dayEvents = events?.filter((event) => event.date === fullDate);
 
     days.push({
       date,

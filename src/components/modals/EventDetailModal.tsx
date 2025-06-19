@@ -33,13 +33,13 @@ export const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
     try {
       await deleteEventMutation.mutateAsync(event.id);
       toast("Success", {
-        description: "Jadwal berhasil dihapus",
+        description: "Schedule was successfully deleted",
       });
       onClose();
     } catch (error) {
       console.error(error);
       toast("Error", {
-        description: "Terjadi kesalahan saat menghapus jadwal",
+        description: "An error occurs when deleting the schedule",
       });
     }
   };
